@@ -37,7 +37,7 @@ const Loginform = () => {
         toast.success(`Email ${email} exists in the database`);
         exponea.start({
           customer: {
-            registered: ${email}
+            registered: email
           }
         });
       } else {
