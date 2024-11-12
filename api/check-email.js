@@ -1,7 +1,7 @@
 // api/check-email.js 
 import https from 'https'; 
 const BLOOMREACH_API_URL = 'https://api-demoapp.exponea.com/data/v2/projects/6dce00a6-25ba-11eb-9cc7-7e4f7e40a7d0/customers/attributes'; 
-const BLOOMREACH_API_KEY = 'Y3JuNzAwZ2Y2c2RoMmVjOXVlbWJsOWg2eWdxZmg2OWIxbmtzN2d6dWJ1MDdjZWo1dmZ4aXVmMTVwb2NoOTdsdzo3aHAxZ3VqM2xxNjVvZGFnejFhNXRxNTRudndyNG9vOXk4Zjdwcjh1cGRoOW1zbGluNjNydW85M3FldzBrcHN0'; // Use your actual API key here 
+const BLOOMREACH_API_KEY = process.env.BLOOMREACH_API_KEY; // Use your actual API key here 
 export default function handler(req, res) { 
     if (req.method === 'POST') { 
         const payload = req.body; 
