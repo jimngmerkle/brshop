@@ -5,12 +5,12 @@ import "./loginform.css";
 
 const Loginform = () => {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState(''); // Add state for password
-  const apiUrl = 'https://brshop-y4bl.vercel.app/api/server';
-  // const apiUrl = 'http://localhost:3000';
+  const [password, setPassword] = useState(''); // Add state for password if required
+  const apiUrl = 'https://brshop-y4bl.vercel.app/api'; // Update with your Vercel app’s base URL
 
   const checkEmail = async (email) => {
     try {
+      // Make a POST request to the /api/check-email endpoint
       const response = await fetch(`${apiUrl}/check-email`, {
         method: 'POST',
         headers: {
@@ -28,14 +28,19 @@ const Loginform = () => {
           ]
         })
       });
+
+      // Parse the JSON response
       const data = await response.json();
-      console.log('data: ',data);
+      console.log('data:', data);
 
       if (data.success) {
-        console.log(`Email ${email} exists in the database`);
         toast.success(`Email ${email} exists in the database`);
+        exponea.start({
+          customer: {
+            registered: ${email}
+          }
+        });
       } else {
-        console.log(`Email ${email} does not exist in the database`);
         toast.error(`Email ${email} does not exist in the database`);
       }
     } catch (error) {
@@ -50,52 +55,50 @@ const Loginform = () => {
   };
 
   return (
-    <>
-      <section className="loginform">
-        <div className="container-login">
-          <div className="wrapper">
-            <div className="heading-login">
-              <h1>Sign In</h1>
-              <p>
-                New User?{" "}
-                <span>
-                  <Link to="/registration">Create an account</Link>
-                </span>
-              </p>
-            </div>
-            <form onSubmit={handleLogin} className="form" action="">
-              <label className="label">
-                Email
-                <input
-                  type="text"
-                  name="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-              </label>
-              <label className="label">
-                Password
-                <input
-                  type="password" // Set type to password to mask input
-                  name="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)} // Update password state
-                  required
-                />
-              </label>
-              <p className="forgot-pass">
-                Forgot Password?{" "}
-                <span>
-                  <Link to="/forgot-password">Click here to reset</Link>
-                </span>
-              </p>
-              <button className="submit-btn">Sign In</button>
-            </form>
+    <section className="loginform">
+      <div className="container-login">
+        <div className="wrapper">
+          <div className="heading-login">
+            <h1>Sign In</h1>
+            <p>
+              New User?{" "}
+              <span>
+                <Link to="/registration">Create an account</Link>
+              </span>
+            </p>
           </div>
+          <form onSubmit={handleLogin} className="form">
+            <label className="label">
+              Email
+              <input
+                type="email" // Use type="email" for validation
+                name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </label>
+            <label className="label">
+              Password
+              <input
+                type="password"
+                name="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </label>
+            <p className="forgot-pass">
+              Forgot Password?{" "}
+              <span>
+                <Link to="/forgot-password">Click here to reset</Link>
+              </span>
+            </p>
+            <button className="submit-btn" type="submit">Sign In</button>
+          </form>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 };
 
