@@ -6,10 +6,12 @@ import "./loginform.css";
 const Loginform = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState(''); // Add state for password
+  const apiUrl = 'https://brshop-y4bl-dsdp2ne3g-jims-projects-ca8ef04f.vercel.app/';
+  // const apiUrl = 'http://localhost:3000';
 
   const checkEmail = async (email) => {
     try {
-      const response = await fetch('http://localhost:3000/check-email', {
+      const response = await fetch(`${apiUrl}/check-email`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

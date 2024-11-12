@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 // Configure CORS to allow requests from your frontend
 // http://localhost:5173
 app.use(cors({
-  origin: 'https://brshop-y4bl.vercel.app', // Replace with your frontend URL
+  origin: 'https://brshop-y4bl-dsdp2ne3g-jims-projects-ca8ef04f.vercel.app/', // Replace with your frontend URL
   methods: 'GET,POST', // Specify allowed methods
   credentials: true // Allow cookies to be sent with requests  
 }));
