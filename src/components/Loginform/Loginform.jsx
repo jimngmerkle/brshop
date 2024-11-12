@@ -35,11 +35,7 @@ const Loginform = () => {
 
       if (data.success) {
         toast.success(`Email ${email} exists in the database`);
-        exponea.start({
-          customer: {
-            registered: email
-          }
-        });
+        exponea.identify(email);
       } else {
         toast.error(`Email ${email} does not exist in the database`);
       }
