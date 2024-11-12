@@ -86,6 +86,20 @@ function App() {
       );
 
       if (confirmOrder) {
+        console.log("Cart contents:");
+        cartItems.forEach((item) => {
+          console.log(`Id: ${item.id}, Name: ${item.name}, Qty: ${item.qty}, Price: ${item.price}`);
+        });
+        const purchase = cartItems.map((item) => ({
+          id: item.id,
+          name: item.name,
+          qty: item.qty,
+          price: item.price,
+        }));
+        
+        console.log(purchase);
+        exponea.track('purchase',{purchase});
+        
         // Clear the cart by setting it to a new array or an empty array
         setCartItems([]);
         toast.success("Order placed, Thanks!!");

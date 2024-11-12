@@ -13,7 +13,7 @@ const Search = ({ cartItems }) => {
         <div className="container c_flex">
           <div className="logo width">
             <Link aria-label="Daraz Home" to="/">
-              <img src="/assets/main-logo/Daraz-Logo.jpg" alt="" />
+              <img src="/assets/main-logo/shop.jpg" alt="" />
             </Link>
           </div>
 

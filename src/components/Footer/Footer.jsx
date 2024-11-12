@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className="footer-container">
       <div className="app-store-play">
-        <h1>Md. Arshad</h1>
+        <h1>Lorem ipsum</h1>
         <p>
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque, quia
           eius est sunt consectetur rem possimus officia minima reiciendis
@@ -40,32 +40,6 @@ const Footer = () => {
           <li>Track Your Order</li>
           <li>Corporate & Bulk Purchasing</li>
           <li>Returns & Refunds</li>
-        </ul>
-      </div>
-      <div className="">
-        <h2>Contact Us</h2>
-        <ul>
-          <li>12/2 Shat Masjid Road, Dhanmondi, Dhaka</li>
-          <li className="contact-info-flex">
-            Email :
-            <a
-              target="_blank"
-              href="mailto:arshadchowdhury46@gmail.com"
-              className="icon-flex phone-icon"
-            >
-              arshadchowdhury46@gmail.com
-            </a>
-          </li>
-          <li className="contact-info-flex">
-            Phone :{" "}
-            <a
-              target="_blank"
-              href="https://api.whatsapp.com/send?phone=8801317089432"
-              className="icon-flex phone-icon"
-            >
-              +8801317089432
-            </a>
-          </li>
         </ul>
       </div>
     </footer>
