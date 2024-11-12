@@ -6,7 +6,7 @@ import "./loginform.css";
 const Loginform = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState(''); // Add state for password
-  const apiUrl = `https://${process.env.VERCEL_URL}`;
+  const apiUrl = 'https://brshop-y4bl.vercel.app';
   // const apiUrl = 'http://localhost:3000';
 
   const checkEmail = async (email) => {
