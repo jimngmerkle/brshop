@@ -35,7 +35,7 @@ const Loginform = () => {
       console.log('data:', data);
 
       if (data.success) {
-        toast.success(`Email ${email} exists in the database`);
+        toast.success(`Email ${email} successfully logged in`);
         exponea.identify(email);
         setTimeout(() => {
           navigate("/"); // Redirect after a delay
