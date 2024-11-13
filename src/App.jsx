@@ -60,7 +60,7 @@ function App() {
     }
   };
   // This function is used for the checkout button it takes cartItems as input and if the length of items in it is 0 it alerts add something to cart first
-  const checkOut = (cartItems) => {
+  const checkOut = async (cartItems) => {
     // if (cartItems.length <= 0) {
     //   toast.error("Add items in cart to checkout");
     // } else {
