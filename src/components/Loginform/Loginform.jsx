@@ -38,8 +38,8 @@ const Loginform = () => {
         toast.success(`Email ${email} exists in the database`);
         exponea.identify(email);
         setTimeout(() => {
-          navigate("/all-products"); // Redirect after a delay
-        }, 1000); 
+          navigate("/"); // Redirect after a delay
+        }, 1500); 
       } else {
         toast.error(`Email ${email} does not exist in the database`);
       }
