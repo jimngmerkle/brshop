@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; 
 import toast from "react-hot-toast";
 
 const Registrationform = () => {
@@ -8,6 +8,7 @@ const Registrationform = () => {
   const [last_name, set_last_name] = useState("");
   const [password, set_password] = useState("");
   const apiUrl = 'https://brshop-y4bl.vercel.app/api'; // Update with your Vercel app’s base URL
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const checkEmail = async (email) => {
     try {
