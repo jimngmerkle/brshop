@@ -18,13 +18,19 @@
       target: "https://api-demoapp.exponea.com",
       token: "6dce00a6-25ba-11eb-9cc7-7e4f7e40a7d0",
       experimental: {
-          non_personalized_weblayers: true
+          non_personalized_weblayers: false
       },
       // replace with current customer ID or leave commented out for an anonymous customer
       // customer: window.currentUserId,
+      ping: {
+          enabled: false,
+      },
+      track: {
+          google_analytics: false,
+      },
   });
   exponea.start();
-  </script>    
+  </script>
   </head>
   <body>
     <div id="root"></div>
