@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom"; 
+import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import "./loginform.css";
 
@@ -7,7 +7,6 @@ const Loginform = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState(''); // Add state for password if required
   const apiUrl = 'https://brshop-y4bl.vercel.app/api'; // Update with your Vercel app’s base URL
-  const navigate = useNavigate(); // Initialize useNavigate
 
   const checkEmail = async (email) => {
     try {
@@ -37,9 +36,6 @@ const Loginform = () => {
       if (data.success) {
         toast.success(`Email ${email} exists in the database`);
         exponea.identify(email);
-        setTimeout(() => {
-          navigate("/home"); // Redirect to home page after a delay
-        }, 2000); 
       } else {
         toast.error(`Email ${email} does not exist in the database`);
       }
