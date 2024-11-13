@@ -46,6 +46,9 @@ const Registrationform = () => {
             'last_name':last_name
           });
         toast.success(`Email ${email} successfully registered`);
+        setTimeout(() => {
+          navigate("/"); // Redirect after a delay
+        }, 1500);         
       }
     } catch (error) {
       console.error('Error checking email:', error);
