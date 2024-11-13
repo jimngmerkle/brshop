@@ -7,74 +7,34 @@ const Registrationform = () => {
   const [first_name, set_first_name] = useState("");
   const [last_name, set_last_name] = useState("");
   const [password, set_password] = useState("");
-  const apiUrl = 'https://brshop-y4bl.vercel.app/api'; // Update with your Vercel app’s base URL
 
-  const checkEmail = async (email) => {
-    try {
-      // Make a POST request to the /api/check-email endpoint
-      const response = await fetch(`${apiUrl}/check-email`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          customer_ids: {
-            registered: email
-          },
-          attributes: [
-            {
-              type: 'id',
-              id: 'registered'
-            }
-          ]
-        })
-      });
-
-      // Parse the JSON response
-      const data = await response.json();
-      console.log('data:', data);
-
-      if (data.success) {
-        toast.error(`Email ${email} already exists in the database`);
-      } else {
-        exponea.identify(
-          {
-            'registered':email
-          },
-          {
-            'first_name':first_name,
-            'last_name':last_name
-          });
-        toast.success(`Email ${email} successfully registered`);
-      }
-    } catch (error) {
-      console.error('Error checking email:', error);
-      toast.error('Error checking email');
-    }
-
-
-    // // exponea.identify(
-    // //   {
-    // //     'registered':email
-    // //   },
-    // //   {
-    // //     'first_name':first_name,
-    // //     'last_name':last_name
-    // //   },
-    // //   function(){
-    // //     toast.success("Registration successful!");
-    // //   },
-    // //   function(){
-    // //     toast.error("Registration failed.");
-    // //   },
-    // //   false
-     // );
-
-  };
-
-  const handleRegister= (event) => {
+  const handleRegister = (event) => {
     event.preventDefault();
-    checkEmail(email);
+
+    // Use the Exponea SDK to update user information
+    exponea.update({
+      email: email || '', // Replace with actual email input if available
+      first_name: first_name || '',
+      last_name: last_name || ''
+    });
+
+    exponea.identify(
+      {
+        'registered':email
+      },
+      {
+        'first_name':first_name,
+        'last_name':last_name
+      },
+      function(){
+        toast.success("Registration successful!");
+      },
+      function(){
+        toast.error("Registration failed.");
+      },
+      false
+    );
+
   };
 
   return (
