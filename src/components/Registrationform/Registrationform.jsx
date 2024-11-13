@@ -37,6 +37,7 @@ const Registrationform = () => {
       if (data.success) {
         toast.error(`Email ${email} already exists in the database`);
       } else {
+        toast.success(`Email ${email} has been successfully registered`);
         exponea.identify(
           {
             'registered':email
@@ -45,7 +46,6 @@ const Registrationform = () => {
             'first_name':first_name,
             'last_name':last_name
           });
-        toast.success(`Email ${email} successfully registered`);
         setTimeout(() => {
           navigate("/"); // Redirect after a delay
         }, 1500);         
