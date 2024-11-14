@@ -69,21 +69,14 @@ function App() {
     const confirmOrder = window.confirm("Are you sure you want to order these products?");
   
     if (confirmOrder) {
-      // Defer logging and tracking operations to avoid blocking the UI thread
+      // Defer tracking operations to avoid blocking the UI thread
       setTimeout(async () => {
-        console.log("Cart contents:");
-        cartItems.forEach((item) => {
-          console.log(`Id: ${item.id}, Name: ${item.name}, Qty: ${item.qty}, Price: ${item.price}`);
-        });
-  
         const purchase = cartItems.map((item) => ({
           id: item.id,
           name: item.name,
           qty: item.qty,
           price: item.price,
         }));
-  
-        console.log(purchase);
   
         // Async tracking call
         await exponea.track('purchase', { purchase });
