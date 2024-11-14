@@ -69,8 +69,8 @@ function App() {
     const confirmOrder = window.confirm("Are you sure you want to order these products?");
   
     if (confirmOrder) {
-      // Defer tracking operations to avoid blocking the UI thread
-      requestIdleCallback(async () => {
+      // Use a microtask to defer the execution of the checkout logic
+      Promise.resolve().then(async () => {
         const purchase = cartItems.map((item) => ({
           id: item.id,
           name: item.name,
