@@ -37,6 +37,8 @@ const Loginform = () => {
       if (data.success) {
         toast.success(`Email ${email} successfully logged in`);
         exponea.identify(email);
+        // Set login status in local storage
+        localStorage.setItem("isLoggedIn", "true");
         setTimeout(() => {
           navigate("/"); // Redirect after a delay
         }, 1500); 
@@ -55,50 +57,36 @@ const Loginform = () => {
   };
 
   return (
-    <section className="loginform">
-      <div className="container-login">
-        <div className="wrapper">
-          <div className="heading-login">
-            <h1>Sign In</h1>
-            <p>
-              New User?{" "}
-              <span>
-                <Link to="/registration">Create an account</Link>
-              </span>
-            </p>
-          </div>
-          <form onSubmit={handleLogin} className="form">
-            <label className="label">
-              Email
-              <input
-                type="email" // Use type="email" for validation
-                name="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </label>
-            <label className="label">
-              Password
-              <input
-                type="password"
-                name="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </label>
-            <p className="forgot-pass">
-              Forgot Password?{" "}
-              <span>
-                <Link to="/forgot-password">Click here to reset</Link>
-              </span>
-            </p>
-            <button className="submit-btn" type="submit">Sign In</button>
-          </form>
+    <div className="login-form">
+      <h2>Sign In</h2>
+      <form onSubmit={handleLogin}>
+        <div>
+          <label>Email</label>
+          <input 
+            type="email" 
+            value={email} 
+            onChange={(e) => setEmail(e.target.value)} 
+            required 
+          />
         </div>
-      </div>
-    </section>
+        <div>
+          <label>Password</label>
+          <input 
+            type="password" 
+            value={password} 
+            onChange={(e) => setPassword(e.target.value)} 
+            required 
+          />
+        </div>
+        <div>
+          <Link to="/reset-password">Forgot Password?</Link>
+        </div>
+        <button type="submit">Sign In</button>
+      </form>
+      <p>
+        New User? <Link to="/register">Create an account</Link>
+      </p>
+    </div>
   );
 };
 
