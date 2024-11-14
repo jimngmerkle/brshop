@@ -512,3 +512,7 @@ li {
   border-radius: 8px;
   text-align: center;
 }
+
+.modal button {
+  margin: 0 20px; 
+}
