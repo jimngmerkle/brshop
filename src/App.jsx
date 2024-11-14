@@ -109,7 +109,6 @@ function App() {
         shopItems={shopItems}
         allProductsData={allProductsData}
         addToCart={addToCart}
-        deleteFromCart={deleteFromCart}
         checkOut={checkOut}
         removeFromCart={removeFromCart}
       />
