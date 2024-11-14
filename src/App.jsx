@@ -61,33 +61,52 @@ function App() {
   };
   // This function is used for the checkout button it takes cartItems as input and if the length of items in it is 0 it alerts add something to cart first
   const checkOut = async (cartItems) => {
+    // if (cartItems.length <= 0) {
+    //   toast.error("Add items in cart to checkout");
+    // } else {
+    //   const confirmOrder = window.confirm(
+    //     "Are you sure you want to order all these products ?"
+    //   );
+
+    //   if (confirmOrder) {
+    //     setCartItems(cartItems.map((item) => item));
+    //     toast.success("Order placed, Thanks for shopping with us");
+    //     // but if it has items in it thn it shows a toast saying thanks for shopping with us
+    //     for (let i = 0; i < cartItems.length; i++) {
+    //       cartItems.splice(0, cartItems.length);
+    //     }
+    //   }
+    // }
+
     if (cartItems.length <= 0) {
       toast.error("Add an item in the cart to checkout");
-      return;
-    }
-  
-    const confirmOrder = window.confirm("Are you sure you want to order these products?");
-  
-    if (confirmOrder) {
-      // Use a microtask to defer the execution of the checkout logic
-      Promise.resolve().then(async () => {
+    } else {
+      const confirmOrder = window.confirm(
+        "Are you sure you want to order all of these products?"
+      );
+
+      if (confirmOrder) {
+        console.log("Cart contents:");
+        cartItems.forEach((item) => {
+          console.log(`Id: ${item.id}, Name: ${item.name}, Qty: ${item.qty}, Price: ${item.price}`);
+        });
         const purchase = cartItems.map((item) => ({
           id: item.id,
           name: item.name,
           qty: item.qty,
           price: item.price,
         }));
-  
-        // Async tracking call
-        await exponea.track('purchase', { purchase });
-  
-        // Clear the cart after tracking
+        
+        console.log(purchase);
+        await exponea.track('purchase',{purchase});
+        
+        // Clear the cart by setting it to a new array or an empty array
         setCartItems([]);
         toast.success("Order placed, Thanks!!");
-      });
+      }
     }
   };
-  
+
   // This function removes an item from the cart entirely, filtering out the values which doesn't have the same id as those clicked
   const removeFromCart = (product) => {
     const shouldRemove = window.confirm(
