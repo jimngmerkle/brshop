@@ -19,8 +19,12 @@ const Navbar = () => {
 
   return (
     <>
+     <header className="container">
+     <div className="menu-items">
+     <div className="categories">
       <div onClick={() => setMobileMenu(false)}>
         <h1>This is a test shop</h1>
+      </div>
       </div>
       <ul>
         <li>
@@ -48,6 +52,7 @@ const Navbar = () => {
           </li>
         */}
       </ul>
+      </div>
       <button onClick={() => setMobileMenu(!mobileMenu)}>
         {mobileMenu ? "Close Menu" : "Open Menu"}
       </button>
@@ -73,6 +78,7 @@ const Navbar = () => {
           </ul>
         </div>
       ) : null}
+      </header>
     </>
   );
 };
