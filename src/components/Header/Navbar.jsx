@@ -3,78 +3,69 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [mobileMenu, setMobileMenu] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    // Check login status from local storage or an API call
-    const loggedInStatus = localStorage.getItem("isLoggedIn") === "true";
-    setIsLoggedIn(loggedInStatus);
-  }, []);
-
-  const handleLogout = () => {
-    // Handle logout logic here
-    localStorage.setItem("isLoggedIn", "false");
-    setIsLoggedIn(false);
-  };
 
   return (
     <>
-      <nav>
-        <div onClick={() => setMobileMenu(false)}>
-          <h1>This is a test shop</h1>
-        </div>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/products">All Products</Link>
-          </li>
-          {isLoggedIn ? (
-            <li onClick={handleLogout}>Log Out</li>
-          ) : (
+      <header className="container">
+        <div className="menu-items">
+          <div className="categories">
+            <span className="fa-solid fa-border-all"></span>
+            <h4 className="head-categories">This is a test shop</h4>
+          </div>
+          <ul
+            className={
+              mobileMenu ? "nav-links-MobileMenu" : "link f_flex capitalize"
+            }
+            onClick={() => setMobileMenu(false)}
+          >
             <li>
-              <Link to="/login">Login</Link>
+              <Link aria-label="Home" className="link-hover" to="/">
+                Home
+              </Link>
             </li>
-          )}
-          <li>
-            <Link to="/register">Registration</Link>
-          </li>
-          {/* 
             <li>
-              <Link to="/admin">Admin Dashboard</Link>
+              <Link
+                aria-label="All Products"
+                className="link-hover"
+                to="/all-products"
+              >
+                All Products
+              </Link>
+            </li>
+            <li>
+              <Link aria-label="Login" className="link-hover" to="/login">
+                Login
+              </Link>
+            </li>
+            <li>
+              <Link
+                aria-label="Registration"
+                className="link-hover"
+                to="/registration"
+              >
+                Registration
+              </Link>
+            </li>
+            {/* <li>
+              <Link to="/admin-dashboard">Admin Dashboard</Link>
             </li>
             <li>
               <Link to="/contact">Contact Us</Link>
-            </li>
-          */}
-        </ul>
-      </nav>
-      <button onClick={() => setMobileMenu(!mobileMenu)}>
-        {mobileMenu ? "Close Menu" : "Open Menu"}
-      </button>
-      {mobileMenu && (
-        <div className="mobile-menu">
-          <ul>
-            <li>
-              <Link to="/" onClick={() => setMobileMenu(false)}>Home</Link>
-            </li>
-            <li>
-              <Link to="/products" onClick={() => setMobileMenu(false)}>All Products</Link>
-            </li>
-            {isLoggedIn ? (
-              <li onClick={() => { handleLogout(); setMobileMenu(false); }}>Log Out</li>
-            ) : (
-              <li>
-                <Link to="/login" onClick={() => setMobileMenu(false)}>Login</Link>
-              </li>
-            )}
-            <li>
-              <Link to="/register" onClick={() => setMobileMenu(false)}>Registration</Link>
-            </li>
+            </li> */}
           </ul>
         </div>
-      )}
+        <button
+          aria-label="Menu bar"
+          className="toggle"
+          onClick={() => setMobileMenu(!mobileMenu)}
+        >
+          {mobileMenu ? (
+            <i className="fas fa-times close home-btn"></i>
+          ) : (
+            <i className="fa fa-bars open"></i>
+          )}
+        </button>
+      </header>
     </>
   );
 };
