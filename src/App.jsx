@@ -36,7 +36,7 @@ function App() {
 
   // This is a function to delete items from the cart, it takes the product and checks within the cart to see if it is already in cart
   // if it has the item it decreases the quantity by 1 with each click, if it has less than 1 number of item it removes entirely from the cart
-  const deleteFromCart = (product) => {
+  const removeFromCart = (product) => {
     const productExists = cartItems.find((item) => item.id === product.id);
     if (productExists.qty === 1) {
       const shouldRemove = window.confirm(
