@@ -70,7 +70,7 @@ function App() {
   
     if (confirmOrder) {
       // Defer tracking operations to avoid blocking the UI thread
-      setTimeout(async () => {
+      requestIdleCallback(async () => {
         const purchase = cartItems.map((item) => ({
           id: item.id,
           name: item.name,
@@ -84,7 +84,7 @@ function App() {
         // Clear the cart after tracking
         setCartItems([]);
         toast.success("Order placed, Thanks!!");
-      }, 0); // Deferring to the next event loop tick
+      });
     }
   };
   
