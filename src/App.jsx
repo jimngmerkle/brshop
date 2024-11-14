@@ -60,32 +60,17 @@ function App() {
     }
   };
   // This function is used for the checkout button it takes cartItems as input and if the length of items in it is 0 it alerts add something to cart first
-  const confirmOrderAsync = () => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        const confirmOrder = window.confirm("Are you sure you want to order all these products?");
-        resolve(confirmOrder);
-      }, 0); // Defer confirm dialog to allow UI update
-    });
-  };
-  
   const checkOut = async (cartItems) => {
     if (cartItems.length <= 0) {
       toast.error("Add an item in the cart to checkout");
       return;
     }
   
-    // Wait for user confirmation in an async, non-blocking way
-    const confirmOrder = await confirmOrderAsync();
+    const confirmOrder = window.confirm("Are you sure you want to order these products?");
   
     if (confirmOrder) {
-      // Deferring heavier tasks after the confirmation
-      setTimeout(async () => {
-        console.log("Cart contents:");
-        cartItems.forEach((item) => {
-          console.log(`Id: ${item.id}, Name: ${item.name}, Qty: ${item.qty}, Price: ${item.price}`);
-        });
-  
+      // Use a microtask to defer the execution of the checkout logic
+      Promise.resolve().then(async () => {
         const purchase = cartItems.map((item) => ({
           id: item.id,
           name: item.name,
@@ -93,17 +78,15 @@ function App() {
           price: item.price,
         }));
   
-        console.log(purchase);
-  
+        // Async tracking call
         await exponea.track('purchase', { purchase });
   
         // Clear the cart after tracking
         setCartItems([]);
         toast.success("Order placed, Thanks!!");
-      }, 0); // Defer to the next event loop tick
+      });
     }
   };
-  
   
   // This function removes an item from the cart entirely, filtering out the values which doesn't have the same id as those clicked
   const removeFromCart = (product) => {
