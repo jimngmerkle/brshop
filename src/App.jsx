@@ -72,6 +72,7 @@ function App() {
   const confirmCheckout = async () => {
 
     if (!isLoggedIn) {
+      console.log("You must be logged in to place an order.");
       toast.error("You must be logged in to place an order.");
       return;
     }
