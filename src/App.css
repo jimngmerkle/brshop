@@ -516,3 +516,12 @@ li {
 .modal button {
   margin: 0 20px; 
 }
+
+.logout-btn {
+  background: none; 
+  border: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  text-decoration: none;
+}

@@ -144,7 +144,7 @@ header ul li a:hover {
 } */
 
 .logout-btn {
-  background: non;
+  background: none; 
   border: none;
   color: inherit;
   font: inherit;
