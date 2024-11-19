@@ -10,6 +10,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     setIsLoggedIn(false);
+    exponea.anonymize();
   };
 
   return (
