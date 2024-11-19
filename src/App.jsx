@@ -4,8 +4,8 @@ import FlashDealsData from "./components/FlashDeals/flashDealsData";
 import ShopData from "./components/Shop/shopData";
 import AllProductsData from "./components/Allproducts/allProductsData";
 import toast, { Toaster } from "react-hot-toast";
-import { AuthProvider, useAuth } from "../src/utils/AuthContext"; // Import the AuthProvider
-import { useAuth } from "../../utils/AuthContext"; 
+import { AuthProvider } from "../src/utils/AuthContext"; // Import the AuthProvider
+
 import "./App.css";
 
 // Custom Modal Component
