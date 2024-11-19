@@ -13,14 +13,6 @@ export const Head = () => {
   </label>  
 </div>
 
-          <div className="right-row">
-            <span>
-              <label htmlFor="">Need Help ?</label>
-            </span>
-            <span>
-              <label htmlFor="">EN</label>
-            </span>
-          </div>
         </div>
       </section>
     </>
