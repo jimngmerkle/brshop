@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from "../../utils/AuthContext"; // Import the AuthContext
+import { useAuth } from "../src/utils/AuthContext"; // Import the AuthContext
 
 const Navbar = () => {
   const [mobileMenu, setMobileMenu] = useState(false);
