@@ -7,13 +7,8 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // Add a logout function that updates the isLoggedIn state
-  const logout = () => {
-    setIsLoggedIn(false); // Set the state to false to indicate that the user is logged out
-  };
-
   return (
-    <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn, logout }}>
+    <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
       {children}
     </AuthContext.Provider>
   );

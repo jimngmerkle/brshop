@@ -4,7 +4,8 @@ import FlashDealsData from "./components/FlashDeals/flashDealsData";
 import ShopData from "./components/Shop/shopData";
 import AllProductsData from "./components/Allproducts/allProductsData";
 import toast, { Toaster } from "react-hot-toast";
-import { AuthProvider } from "../src/utils/AuthContext"; // Import the AuthProvider
+import { AuthProvider, useAuth } from "../src/utils/AuthContext"; // Import the AuthProvider
+
 import "./App.css";
 
 // Custom Modal Component
@@ -14,7 +15,7 @@ function ConfirmationModal({ isOpen, onConfirm, onCancel }) {
   return (
     <div className="modal-backdrop">
       <div className="modal">
-        <p>Are you sure you want to order all these products?</p>
+        <p>Are you sure you want to order all of these products?</p>
         <button onClick={onConfirm}>Yes</button>
         <button onClick={onCancel}>No</button>
       </div>
@@ -26,7 +27,7 @@ function App() {
   const { productItems } = FlashDealsData;
   const { shopItems } = ShopData;
   const { allProductsData } = AllProductsData;
-
+  const { isLoggedIn, logout } = useAuth(); // Access login state and logout function
   const [cartItems, setCartItems] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -69,6 +70,12 @@ function App() {
   };
 
   const confirmCheckout = async () => {
+
+    if (!isLoggedIn) {
+      toast.error("You must be logged in to place an order.");
+      return;
+    }
+
     console.log("Cart contents:");
     const purchase = cartItems.map((item) => ({
       id: item.id,
