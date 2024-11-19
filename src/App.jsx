@@ -5,7 +5,7 @@ import ShopData from "./components/Shop/shopData";
 import AllProductsData from "./components/Allproducts/allProductsData";
 import toast, { Toaster } from "react-hot-toast";
 import { AuthProvider, useAuth } from "../src/utils/AuthContext"; // Import the AuthProvider
-
+import { useAuth } from "../../utils/AuthContext"; 
 import "./App.css";
 
 // Custom Modal Component
@@ -15,7 +15,7 @@ function ConfirmationModal({ isOpen, onConfirm, onCancel }) {
   return (
     <div className="modal-backdrop">
       <div className="modal">
-        <p>Are you sure you want to order all of these products?</p>
+        <p>Are you sure you want to order all these products?</p>
         <button onClick={onConfirm}>Yes</button>
         <button onClick={onCancel}>No</button>
       </div>
@@ -27,7 +27,7 @@ function App() {
   const { productItems } = FlashDealsData;
   const { shopItems } = ShopData;
   const { allProductsData } = AllProductsData;
-  const { setIsLoggedIn } = useAuth(); // Access the AuthContext to update login state
+
   const [cartItems, setCartItems] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
