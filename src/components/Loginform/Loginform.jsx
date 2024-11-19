@@ -43,6 +43,7 @@ const Loginform = () => {
         }, 1500);
       } else {
         toast.error(`Email ${email} does not exist in the database`);
+        console.log(`Email ${email} does not exist in the database`);
       }
     } catch (error) {
       console.error('Error checking email:', error);
