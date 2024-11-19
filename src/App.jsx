@@ -4,7 +4,8 @@ import FlashDealsData from "./components/FlashDeals/flashDealsData";
 import ShopData from "./components/Shop/shopData";
 import AllProductsData from "./components/Allproducts/allProductsData";
 import toast, { Toaster } from "react-hot-toast";
-import { AuthProvider, useAuth } from "./utils/AuthContext"; // Import the AuthProvider
+import { AuthProvider, useAuth } from "../src/utils/AuthContext"; // Import the AuthProvider
+
 import "./App.css";
 
 // Custom Modal Component
@@ -12,9 +13,9 @@ function ConfirmationModal({ isOpen, onConfirm, onCancel }) {
   if (!isOpen) return null;
 
   return (
-    <div className="modal">
-      <div className="modal-content">
-        <h2>Are you sure you want to order all of these products?</h2>
+    <div className="modal-backdrop">
+      <div className="modal">
+        <p>Are you sure you want to order all of these products?</p>
         <button onClick={onConfirm}>Yes</button>
         <button onClick={onCancel}>No</button>
       </div>
@@ -26,8 +27,7 @@ function App() {
   const { productItems } = FlashDealsData;
   const { shopItems } = ShopData;
   const { allProductsData } = AllProductsData;
-  const { isLoggedIn } = useAuth(); // Access login state
-  console.log("App component rendered. isLoggedIn:", isLoggedIn);
+  const { setIsLoggedIn } = useAuth(); // Access the AuthContext to update login state
   const [cartItems, setCartItems] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -70,12 +70,6 @@ function App() {
   };
 
   const confirmCheckout = async () => {
-    if (!isLoggedIn) {
-      console.log("You must be logged in to place an order.");
-      toast.error("You must be logged in to place an order.");
-      return;
-    }
-
     console.log("Cart contents:");
     const purchase = cartItems.map((item) => ({
       id: item.id,
@@ -99,22 +93,22 @@ function App() {
   return (
     <AuthProvider> {/* Wrap the application with AuthProvider */}
       <>
+        <Toaster />
         <AllRoutes
-          productItems={productItems}
-          shopItems={shopItems}
-          allProductsData={allProductsData}
-          addToCart={addToCart}
-          deleteFromCart={deleteFromCart}
-          cartItems={cartItems}
           removeFromCart={removeFromCart}
+          productItems={productItems}
+          cartItems={cartItems}
+          addToCart={addToCart}
+          shopItems={shopItems}
+          deleteFromCart={deleteFromCart}
           checkOut={checkOut}
+          allProductsData={allProductsData}
         />
         <ConfirmationModal
           isOpen={isModalOpen}
           onConfirm={confirmCheckout}
           onCancel={() => setIsModalOpen(false)}
         />
-        <Toaster />
       </>
     </AuthProvider>
   );
