@@ -8,6 +8,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     exponea.anonymize();
+    console.log('User logged out.')
     logout(); // Call the logout function
     setMobileMenu(false); // Close the mobile menu after logout
   };
