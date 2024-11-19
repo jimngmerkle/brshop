@@ -27,7 +27,7 @@ function App() {
   const { productItems } = FlashDealsData;
   const { shopItems } = ShopData;
   const { allProductsData } = AllProductsData;
-  const { isLoggedIn, logout } = useAuth(); // Access login state and logout function
+  const { setIsLoggedIn } = useAuth(); // Access the AuthContext to update login state
   const [cartItems, setCartItems] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -70,7 +70,6 @@ function App() {
   };
 
   const confirmCheckout = async () => {
-    
     console.log("Cart contents:");
     const purchase = cartItems.map((item) => ({
       id: item.id,
