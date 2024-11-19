@@ -1,10 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import AllRoutes from "./allroutes/AllRoutes";
 import FlashDealsData from "./components/FlashDeals/flashDealsData";
 import ShopData from "./components/Shop/shopData";
 import AllProductsData from "./components/Allproducts/allProductsData";
 import toast, { Toaster } from "react-hot-toast";
-import { AuthProvider, AuthContext } from "../src/utils/AuthContext"; // Import the AuthProvider and context
+import { AuthProvider, useAuth } from "../src/utils/AuthContext"; // Import useAuth
 import "./App.css";
 
 // Custom Modal Component
@@ -30,7 +30,7 @@ function App() {
   const [cartItems, setCartItems] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const { isLoggedIn } = useContext(AuthContext); // Access login state from AuthContext
+  const { isLoggedIn } = useAuth(); // Use the custom hook for accessing login state
 
   const addToCart = (product) => {
     const productExists = cartItems.find((item) => item.id === product.id);
@@ -98,7 +98,8 @@ function App() {
   };
 
   return (
-    <AuthProvider> {/* Wrap the application with AuthProvider */}
+    <AuthProvider>
+      {/* Wrap the application with AuthProvider */}
       <>
         <Toaster />
         <AllRoutes
