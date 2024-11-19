@@ -143,6 +143,15 @@ header ul li a:hover {
   color: #e94560;
 } */
 
+.logout-btn {
+  background: non;
+  border: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  text-decoration: none;
+}
+
 .open {
   display: none;
 }

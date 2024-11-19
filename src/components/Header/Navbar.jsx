@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../utils/AuthContext"; // Import the AuthContext
 
 const Navbar = () => {
   const [mobileMenu, setMobileMenu] = useState(false);
+  const { isLoggedIn, logout } = useAuth(); // Access login state and logout function
 
   return (
     <>
@@ -32,11 +34,23 @@ const Navbar = () => {
                 All Products
               </Link>
             </li>
-            <li>
-              <Link aria-label="Login" className="link-hover" to="/login">
-                Login
-              </Link>
-            </li>
+            {!isLoggedIn ? ( // Show "Login" if not logged in
+              <li>
+                <Link aria-label="Login" className="link-hover" to="/login">
+                  Login
+                </Link>
+              </li>
+            ) : ( // Show "Logout" if logged in
+              <li>
+                <button
+                  aria-label="Logout"
+                  className="link-hover logout-btn"
+                  onClick={logout} // Call logout function when clicked
+                >
+                  Logout
+                </button>
+              </li>
+            )}
             <li>
               <Link
                 aria-label="Registration"
@@ -46,12 +60,6 @@ const Navbar = () => {
                 Registration
               </Link>
             </li>
-            {/* <li>
-              <Link to="/admin-dashboard">Admin Dashboard</Link>
-            </li>
-            <li>
-              <Link to="/contact">Contact Us</Link>
-            </li> */}
           </ul>
         </div>
         <button
