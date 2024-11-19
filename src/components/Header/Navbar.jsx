@@ -6,13 +6,6 @@ const Navbar = () => {
   const [mobileMenu, setMobileMenu] = useState(false);
   const { isLoggedIn, logout } = useAuth(); // Access login state and logout function
 
-  const handleLogout = () => {
-    exponea.anonymize();
-    console.log('User logged out.')
-    logout(); // Call the logout function
-    setMobileMenu(false); // Close the mobile menu after logout
-  };
-
   return (
     <>
       <header className="container">
@@ -52,7 +45,7 @@ const Navbar = () => {
                 <button
                   aria-label="Logout"
                   className="link-hover logout-btn"
-                  onClick={handleLogout} // Call the handleLogout function when clicked
+                  onClick={logout} // Call logout function when clicked
                 >
                   Logout
                 </button>
