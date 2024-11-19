@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom"; 
 import toast from "react-hot-toast";
+import { useAuth } from "../../utils/AuthContext"; 
 
 const Registrationform = () => {
   const [email, set_email] = useState("");
@@ -47,6 +48,7 @@ const Registrationform = () => {
             'first_name':first_name,
             'last_name':last_name
           });
+        setIsLoggedIn(true); // Update global login state
         setTimeout(() => {
           navigate("/"); // Redirect after a delay
         }, 1500);         

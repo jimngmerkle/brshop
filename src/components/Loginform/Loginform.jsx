@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { useAuth } from "../../utils/AuthContext"; // Import the AuthContext
+import { useAuth } from "../../utils/AuthContext"; 
 import "./loginform.css";
 
 const Loginform = () => {
