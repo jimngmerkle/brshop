@@ -10,6 +10,7 @@ const Registrationform = () => {
   const [password, set_password] = useState("");
   const apiUrl = 'https://brshop-y4bl.vercel.app/api'; // Update with your Vercel app’s base URL
   const navigate = useNavigate(); // Initialize useNavigate
+  const { setIsLoggedIn } = useAuth(); // Access the AuthContext to update login state
 
   const checkEmail = async (email) => {
     try {
