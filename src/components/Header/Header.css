@@ -236,3 +236,7 @@ button {
     width: 6rem;
   }
 }
+
+.white-text {
+  color:white;
+}

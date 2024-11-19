@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom"; 
+import "./Header.css";
 
 export const Head = () => {
   return (
@@ -7,11 +9,8 @@ export const Head = () => {
         <div className="container d_flex">
         <div className="left-row">
   <label htmlFor="">
-    merkle
-  </label>
-  <label htmlFor="">
-    bloomreach test shop
-  </label>
+          <Link aria-label="Home" className="left-row white-text" to="/">merkle-bloomreach test shop</Link>
+  </label>  
 </div>
 
           <div className="right-row">
