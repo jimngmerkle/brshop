@@ -1,0 +1,48 @@
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useAuth } from "./AuthContext"; // Import the AuthContext
+
+const Navbar = () => {
+  const [mobileMenu, setMobileMenu] = useState(false);
+  const { isLoggedIn, setIsLoggedIn } = useAuth(); // Access the AuthContext
+
+  const handleLogout = () => {
+    setIsLoggedIn(false); // Update global login state
+    console.log("User logged out");
+  };
+
+  return (
+    <>
+      <header className="container">
+        <div className="menu-items">
+          <ul
+            className={
+              mobileMenu ? "nav-links-MobileMenu" : "link f_flex capitalize"
+            }
+            onClick={() => setMobileMenu(false)}
+          >
+            <li>
+              <Link aria-label="Home" to="/">Home</Link>
+            </li>
+            {isLoggedIn ? (
+              <li>
+                <button
+                  aria-label="Logout"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </button>
+              </li>
+            ) : (
+              <li>
+                <Link aria-label="Login" to="/login">Login</Link>
+              </li>
+            )}
+          </ul>
+        </div>
+      </header>
+    </>
+  );
+};
+
+export default Navbar;
