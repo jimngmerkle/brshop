@@ -27,6 +27,7 @@ function App() {
   const { shopItems } = ShopData;
   const { allProductsData } = AllProductsData;
   const { isLoggedIn } = useAuth(); // Access login state
+  console.log("App component rendered. isLoggedIn:", isLoggedIn);
   const [cartItems, setCartItems] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
