@@ -1,17 +1,18 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom"; 
+import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { useAuth } from "../../utils/AuthContext"; // Import the AuthContext
 import "./loginform.css";
 
 const Loginform = () => {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState(''); // Add state for password if required
-  const apiUrl = 'https://brshop-y4bl.vercel.app/api'; // Update with your Vercel app’s base URL
-  const navigate = useNavigate(); // Initialize useNavigate
+  const [password, setPassword] = useState('');
+  const apiUrl = 'https://brshop-y4bl.vercel.app/api';
+  const navigate = useNavigate();
+  const { setIsLoggedIn } = useAuth(); // Access the AuthContext to update login state
 
   const checkEmail = async (email) => {
     try {
-      // Make a POST request to the /api/check-email endpoint
       const response = await fetch(`${apiUrl}/check-email`, {
         method: 'POST',
         headers: {
@@ -30,16 +31,17 @@ const Loginform = () => {
         })
       });
 
-      // Parse the JSON response
       const data = await response.json();
       console.log('data:', data);
 
       if (data.success) {
         toast.success(`Email ${email} successfully logged in`);
+        setIsLoggedIn(true); // Update global login state
+        login();
         exponea.identify(email);
         setTimeout(() => {
           navigate("/"); // Redirect after a delay
-        }, 1500); 
+        }, 1500);
       } else {
         toast.error(`Email ${email} does not exist in the database`);
       }
@@ -71,7 +73,7 @@ const Loginform = () => {
             <label className="label">
               Email
               <input
-                type="email" // Use type="email" for validation
+                type="email"
                 name="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
