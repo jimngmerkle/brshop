@@ -4,8 +4,6 @@ import FlashDealsData from "./components/FlashDeals/flashDealsData";
 import ShopData from "./components/Shop/shopData";
 import AllProductsData from "./components/Allproducts/allProductsData";
 import toast, { Toaster } from "react-hot-toast";
-import { AuthProvider } from "../src/utils/AuthContext"; // Import the AuthProvider
-
 import "./App.css";
 
 // Custom Modal Component
@@ -91,26 +89,24 @@ function App() {
   };
 
   return (
-    <AuthProvider> {/* Wrap the application with AuthProvider */}
-      <>
-        <Toaster />
-        <AllRoutes
-          removeFromCart={removeFromCart}
-          productItems={productItems}
-          cartItems={cartItems}
-          addToCart={addToCart}
-          shopItems={shopItems}
-          deleteFromCart={deleteFromCart}
-          checkOut={checkOut}
-          allProductsData={allProductsData}
-        />
-        <ConfirmationModal
-          isOpen={isModalOpen}
-          onConfirm={confirmCheckout}
-          onCancel={() => setIsModalOpen(false)}
-        />
-      </>
-    </AuthProvider>
+    <>
+      <Toaster />
+      <AllRoutes
+        removeFromCart={removeFromCart}
+        productItems={productItems}
+        cartItems={cartItems}
+        addToCart={addToCart}
+        shopItems={shopItems}
+        deleteFromCart={deleteFromCart}
+        checkOut={checkOut}
+        allProductsData={allProductsData}
+      />
+      <ConfirmationModal
+        isOpen={isModalOpen}
+        onConfirm={confirmCheckout}
+        onCancel={() => setIsModalOpen(false)}
+      />
+    </>
   );
 }
 
