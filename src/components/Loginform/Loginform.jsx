@@ -8,8 +8,9 @@ const Loginform = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   //const apiUrl = 'https://brshop-y4bl.vercel.app/api';
-  const apiUrl = process.env.REACT_APP_API_URL; // Use environment variable
-  const navigate = useNavigate();
+  //const apiUrl = process.env.REACT_APP_API_URL; // Use environment variable
+  const apiUrl = import.meta.env.VITE_APP_API_URL;
+  const navigate = useNavigate(); 
   const { setIsLoggedIn } = useAuth(); // Access the AuthContext to update login state
 
   const checkEmail = async (email) => {
