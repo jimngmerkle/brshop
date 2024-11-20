@@ -36,6 +36,7 @@ const Loginform = () => {
 
       if (data.success) {
         toast.success(`Email ${email} successfully logged in`);
+        console.log(`Email ${email} logged in`);
         setIsLoggedIn(true); // Update global login state
         exponea.identify(email); 
         setTimeout(() => {

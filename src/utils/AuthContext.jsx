@@ -9,6 +9,7 @@ export const AuthProvider = ({ children }) => {
   // console.log("AuthProvider rendered. isLoggedIn:", isLoggedIn);
 
   const logout = () => {
+    console.log('User logged out.')
     setIsLoggedIn(false);
     exponea.anonymize();
   };
