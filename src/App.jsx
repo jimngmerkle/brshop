@@ -72,6 +72,7 @@ function App() {
     if (!isLoggedIn) {
       console.log('No user logged in.');
       toast.error("Please log in or register to complete purchase");
+      setIsModalOpen(false);
       return; // Stop further execution if not logged in
     } else {
       console.log('logged in.');
