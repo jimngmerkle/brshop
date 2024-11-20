@@ -69,15 +69,14 @@ function App() {
   };
 
   const confirmCheckout = async () => {
-
-    {!isLoggedIn? (
-      console.log('logged in.')
-    ) : (
-      console.log('logged out.')
-    )
-
+    if (!isLoggedIn) {
+      console.log('No user logged in.');
+      toast.error("Please log in or register to complete purchase");
+      return; // Stop further execution if not logged in
+    } else {
+      console.log('logged in.');
     }
-
+  
     console.log("Cart contents:");
     const purchase = cartItems.map((item) => ({
       id: item.id,
@@ -85,7 +84,7 @@ function App() {
       qty: item.qty,
       price: item.price,
     }));
-
+  
     console.log(purchase);
     await exponea.track('purchase', { purchase });
     setCartItems([]);
