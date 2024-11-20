@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000;
 
 // Your Bloomreach API details
 const BLOOMREACH_API_URL = 'https://api-demoapp.exponea.com/data/v2/projects/6dce00a6-25ba-11eb-9cc7-7e4f7e40a7d0/customers/attributes';
-const BLOOMREACH_API_KEY = 'Y3JuNzAwZ2Y2c2RoMmVjOXVlbWJsOWg2eWdxZmg2OWIxbmtzN2d6dWJ1MDdjZWo1dmZ4aXVmMTVwb2NoOTdsdzo3aHAxZ3VqM2xxNjVvZGFnejFhNXRxNTRudndyNG9vOXk4Zjdwcjh1cGRoOW1zbGluNjNydW85M3FldzBrcHN0';
+//const BLOOMREACH_API_KEY = 'xxx';
 
 // Middleware to parse JSON bodies
 app.use(bodyParser.json());
