@@ -7,13 +7,4 @@ export default defineConfig({
   optimizeDeps: {
     include: ['react', 'react-dom'],
   },
-  server: {
-    proxy: {
-      '/api': {
-        target: 'https://brshop-y4bl.vercel.app',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '')
-      }
-    }
-  }
-})
+  })
