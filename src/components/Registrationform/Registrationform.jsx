@@ -42,6 +42,7 @@ const Registrationform = () => {
         console.log(`Email ${email} already exists in the database`)
       } else {
         toast.success(`Email ${email} has been successfully registered`);
+        console.log(`Email ${email} registered in the database`)
         exponea.identify(
           {
             'registered':email
