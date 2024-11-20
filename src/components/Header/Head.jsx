@@ -9,7 +9,7 @@ export const Head = () => {
         <div className="container d_flex">
         <div className="left-row">
   <label htmlFor="">
-          <Link aria-label="Home" className="left-row white-text" to="/">merkle-bloomreach test shop</Link>
+          <Link aria-label="Home" className="left-row white-text" to="/">Merkle-bloomreach test shop</Link>
   </label>  
 </div>
 
