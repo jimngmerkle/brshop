@@ -10,7 +10,7 @@ const Loginform = () => {
   //const apiUrl = 'https://brshop-y4bl.vercel.app/api';
   //const apiUrl = process.env.REACT_APP_API_URL; // Use environment variable
   //const apiUrl = 'http://localhost:5173';
-  const apiUrl = import.meta.env.VITE_APP_API_URL || 'http://localhost:3000';
+  const apiUrl = import.meta.env.VITE_APP_API_URL || 'http://localhost:5173';
   const navigate = useNavigate(); 
   const { setIsLoggedIn } = useAuth(); // Access the AuthContext to update login state
 
