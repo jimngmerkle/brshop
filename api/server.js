@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 // 'http://localhost:5173'
 // https://brshop-y4bl.vercel.app'
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: 'https://brshop-y4bl.vercel.app',
   methods: 'GET,POST', // Specify allowed methods
   credentials: true // Allow cookies to be sent with requests  
 }));
