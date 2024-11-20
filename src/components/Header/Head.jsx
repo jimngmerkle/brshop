@@ -8,7 +8,7 @@ export const Head = () => {
       <section className="head">
         <div className="container d_flex">
         <div className="left-row">
-  <label htmlFor="">
+  <label>
           <Link aria-label="Home" className="left-row white-text" to="/">Merkle-Bloomreach test shop</Link>
   </label>  
 </div>
