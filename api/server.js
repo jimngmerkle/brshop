@@ -15,8 +15,9 @@ app.use(bodyParser.json());
 
 // Configure CORS to allow requests from your frontend
 // 'http://localhost:5173'
+// https://brshop-y4bl.vercel.app'
 app.use(cors({
-  origin: ['https://brshop-y4bl.vercel.app','https://main.d1bgqmcqrjyzl7.amplifyapp.com/','http://localhost:5173'], 
+  origin: ['https://brshop-y4bl.vercel.app','http://localhost:5173'], 
   methods: 'GET,POST', // Specify allowed methods
   credentials: true // Allow cookies to be sent with requests  
 }));
