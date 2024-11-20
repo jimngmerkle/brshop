@@ -4,6 +4,7 @@ import FlashDealsData from "./components/FlashDeals/flashDealsData";
 import ShopData from "./components/Shop/shopData";
 import AllProductsData from "./components/Allproducts/allProductsData";
 import toast, { Toaster } from "react-hot-toast";
+import { useAuth } from "../src/utils/AuthContext";
 import "./App.css";
 
 // Custom Modal Component
@@ -25,7 +26,7 @@ function App() {
   const { productItems } = FlashDealsData;
   const { shopItems } = ShopData;
   const { allProductsData } = AllProductsData;
-
+  const { isLoggedIn } = useAuth(); // Access login state and logout function
   const [cartItems, setCartItems] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -68,6 +69,15 @@ function App() {
   };
 
   const confirmCheckout = async () => {
+
+    {!isLoggedIn? (
+      console.log('logged in.')
+    ) : (
+      console.log('logged out.')
+    )
+
+    }
+
     console.log("Cart contents:");
     const purchase = cartItems.map((item) => ({
       id: item.id,
