@@ -1,13 +1,3 @@
-# Daraz Clone
-
-## This Daraz clone e-commerce site is built with Vite and ReactJS.
-
-I've used some react hooks, react-slick-slider, font awesome, react-routers, react hot toast and some other packages in here which made the site look good & feel good while using it.
-
-## You can check the site live here - 
-
-https://react-daraz-clone.netlify.app/
-
 ## Overview of the app - 
 
 ![image](https://github.com/ArshadChowdhury/react-eCommerce-app-interview/assets/86738490/391557c7-091b-4842-a079-d82984fac897)
