@@ -1,30 +1,26 @@
 import express from 'express';
 import https from 'https';
 import bodyParser from 'body-parser';
-import cors from 'cors'; // Import the cors package
+import cors from 'cors'; 
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-
-// Your Bloomreach API details
-const BLOOMREACH_API_URL = 'https://api-demoapp.exponea.com/data/v2/projects/6dce00a6-25ba-11eb-9cc7-7e4f7e40a7d0/customers/attributes';
-//const BLOOMREACH_API_KEY = 'xxx';
+const BLOOMREACH_PROJECT_ID = process.env.BLOOMREACH_PROJECT_ID;
+const BLOOMREACH_API_URL = `https://api-demoapp.exponea.com/data/v2/projects/${BLOOMREACH_PROJECT_ID}/customers/attributes`;
 
 // Middleware to parse JSON bodies
 app.use(bodyParser.json());
 
 // Configure CORS to allow requests from your frontend
 // 'http://localhost:5173'
-// https://brshop-y4bl.vercel.app'
 app.use(cors({
   origin: 'https://brshop-y4bl.vercel.app',
-  methods: 'GET,POST', // Specify allowed methods
-  credentials: true // Allow cookies to be sent with requests  
+  methods: 'GET,POST', 
+  credentials: true   
 }));
 
-// Endpoint to send the payload to the Bloomreach customer database
+// Endpoint to send the payload to Bloomreach
 app.post('/check-email', (req, res) => {
-  // Commenting out the dynamic payload
   const payload = req.body;
   console.log(`Received payload: ${JSON.stringify(payload)}`);
 
