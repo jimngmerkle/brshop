@@ -8,6 +8,6 @@ export default defineConfig({
     include: ['react', 'react-dom'],
   },
   build: {
-    minify: false,
+    sourcemap: true,
   },
 });
