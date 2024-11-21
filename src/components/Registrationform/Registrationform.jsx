@@ -43,27 +43,29 @@ const Registrationform = () => {
       } else if (response.status === 401) {
         toast.error('Unauthorized access. Please check credentials');
         console.log('Unauthorized access. Please check credentials');
-      } else {
+      } else if (response.status === 404) {
         toast.success(`Email ${email} has been successfully registered`);
         console.log(`Email ${email} registered in the database`);
         exponea.identify(
           {
-            'registered':email
+            'registered': email
           },
           {
-            'first_name':first_name,
-            'last_name':last_name
+            'first_name': first_name,
+            'last_name': last_name
           });
         setIsLoggedIn(true); // Update global login state
         setTimeout(() => {
           navigate("/"); // Redirect after a delay
         }, 1500);         
+      } else {
+        toast.error('An error occurred during registration');
+        console.log('An error occurred during registration');
       }
     } catch (error) {
       console.error('Error checking email:', error);
       toast.error('Error checking email');
     }
-
   };
 
   const handleRegister= (event) => {
