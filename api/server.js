@@ -7,6 +7,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const BLOOMREACH_PROJECT_ID = process.env.BLOOMREACH_PROJECT_ID;
 const BLOOMREACH_API_URL = `https://api-demoapp.exponea.com/data/v2/projects/${BLOOMREACH_PROJECT_ID}/customers/attributes`; 
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
 // Middleware to parse JSON bodies
 app.use(bodyParser.json());
@@ -14,7 +15,7 @@ app.use(bodyParser.json());
 // Configure CORS to allow requests from frontend
 // 'http://localhost:5173'
 app.use(cors({
-  origin: 'https://brshop-y4bl.vercel.app',
+  origin: REACT_APP_API_URL,
   methods: 'GET,POST', 
   credentials: true   
 }));
