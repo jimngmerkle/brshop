@@ -5,7 +5,8 @@ import cors from 'cors';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const BLOOMREACH_PROJECT_ID = process.env.BLOOMREACH_PROJECT_ID;
+//const BLOOMREACH_PROJECT_ID = process.env.BLOOMREACH_PROJECT_ID;
+const BLOOMREACH_PROJECT_ID = 'test';
 const BLOOMREACH_API_URL = `https://api-demoapp.exponea.com/data/v2/projects/${BLOOMREACH_PROJECT_ID}/customers/attributes`; 
 
 // Middleware to parse JSON bodies
