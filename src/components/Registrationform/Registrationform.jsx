@@ -8,8 +8,8 @@ const Registrationform = () => {
   const [first_name, set_first_name] = useState("");
   const [last_name, set_last_name] = useState("");
   const [password, set_password] = useState("");
-  const apiUrl = 'https://brshop-y4bl.vercel.app/api'; // Update with your Vercel app’s base URL
-  const navigate = useNavigate(); // Initialize useNavigate
+  const apiUrl = 'https://brshop-y4bl.vercel.app/api'; 
+  const navigate = useNavigate(); 
   const { setIsLoggedIn } = useAuth(); // Access the AuthContext to update login state
 
   const checkEmail = async (email) => {
@@ -45,7 +45,7 @@ const Registrationform = () => {
         console.log('Unauthorized access. Please check credentials');
       } else {
         toast.success(`Email ${email} has been successfully registered`);
-        console.log(`Email ${email} registered in the database`)
+        console.log(`Email ${email} registered in the database`);
         exponea.identify(
           {
             'registered':email
@@ -63,24 +63,6 @@ const Registrationform = () => {
       console.error('Error checking email:', error);
       toast.error('Error checking email');
     }
-
-
-    // // exponea.identify(
-    // //   {
-    // //     'registered':email
-    // //   },
-    // //   {
-    // //     'first_name':first_name,
-    // //     'last_name':last_name
-    // //   },
-    // //   function(){
-    // //     toast.success("Registration successful!");
-    // //   },
-    // //   function(){
-    // //     toast.error("Registration failed.");
-    // //   },
-    // //   false
-     // );
 
   };
 

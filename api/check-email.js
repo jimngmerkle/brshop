@@ -1,4 +1,3 @@
-// api/check-email.js 
 import https from 'https'; 
 const BLOOMREACH_PROJECT_ID = process.env.BLOOMREACH_PROJECT_ID;
 const BLOOMREACH_API_KEY = process.env.BLOOMREACH_API_KEY;
