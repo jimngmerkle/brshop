@@ -43,7 +43,7 @@ const Loginform = () => {
         setIsLoggedIn(true); // Update global login state
         exponea.identify(email); 
         setTimeout(() => {
-          navigate("/"); // Redirect after a delay
+          navigate("/"); 
         }, 1500);
       } else {
         toast.error(`Email ${email} does not exist in the database`);
