@@ -1,40 +1,75 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from "../../utils/AuthContext"; 
+import toast from "react-hot-toast";
 import './Subscriptionform.css';
 
 const Subscriptionform = () => {
-  const [email, setEmail] = useState('');
+  const { email } = useAuth(); // Access email from AuthContext
   const [categories, setCategories] = useState([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const apiUrl = import.meta.env.VITE_APP_API_URL || 'http://localhost:5173';
 
   useEffect(() => {
     const fetchConsents = async () => {
       try {
-        const response = await fetch('/api/get-consents');
+        const response = await fetch(`${apiUrl}/check-email`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            customer_ids: {
+              registered: email
+            },
+            attributes: [
+              {
+                type: 'id',
+                id: 'registered'
+              }
+            ]
+          })
+        });
+
         const data = await response.json();
-        setEmail(data.email);
-        setCategories(data.categories);
+        console.log('data:', data);
+
+        if (data.success) {
+          setCategories(data.categories);
+        } else {
+          toast.error('Error fetching consents');
+          console.log('Error fetching consents');
+        }
       } catch (error) {
         console.error('Error fetching consents:', error);
+        toast.error('Error fetching consents');
       }
     };
 
     fetchConsents();
-  }, []);
+  }, [apiUrl, email]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await fetch('/api/update-consents', {
+      const response = await fetch(`${apiUrl}/update-consents`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ categories }),
       });
-      setIsSubmitted(true);
+
+      const data = await response.json();
+      if (data.success) {
+        setIsSubmitted(true);
+        toast.success('Settings saved!');
+      } else {
+        toast.error('Error updating consents');
+        console.log('Error updating consents');
+      }
     } catch (error) {
       console.error('Error updating consents:', error);
+      toast.error('Error updating consents');
     }
   };
 
@@ -58,7 +93,7 @@ const Subscriptionform = () => {
       {isSubmitted && <div className="success">Settings saved!</div>}
       <div className="email-block">
         <div className="email-block-title">
-          Email Subscriptions for <strong>${email}</strong>
+          Email Subscriptions for <strong>{email}</strong>
         </div>
         <div className="email-block-subtitle">
           Here you can change your email sending preferences.
@@ -85,9 +120,6 @@ const Subscriptionform = () => {
         </div>
         <hr />
         <button type="submit">Change subscriptions</button>
-        <button type="button" onClick={unsubscribeAll}>
-          Unsubscribe from all
-        </button>
       </form>
     </div>
   );
