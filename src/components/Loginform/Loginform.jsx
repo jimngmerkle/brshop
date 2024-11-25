@@ -16,7 +16,7 @@ const Loginform = () => {
       const response = await fetch(`${apiUrl}/check-email`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json' 
         },
         body: JSON.stringify({
           customer_ids: {
