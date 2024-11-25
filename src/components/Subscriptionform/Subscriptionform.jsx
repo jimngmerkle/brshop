@@ -68,12 +68,24 @@ const Subscriptionform = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch(`${apiUrl}/update-consents`, {
+      const payload = categories.map(category => ({
+        customer_ids: {
+          registered: email
+        },
+        properties: {
+          action: category.valid ? "accept" : "reject",
+          category: category.name,
+          valid_until: "unlimited"
+        },
+        event_type: "consent"
+      }));
+
+      const response = await fetch(`${apiUrl}/update-consent`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ categories }),
+        body: JSON.stringify(payload),
       });
 
       const data = await response.json();
