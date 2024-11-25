@@ -151,6 +151,7 @@ const Subscriptionform = () => {
           ))}
         </div>
         <button class="btn-primary" type="submit">Change subscriptions</button>
+        <p></p>
       </form>
     </div>
   );
