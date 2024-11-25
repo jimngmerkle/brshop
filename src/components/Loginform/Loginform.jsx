@@ -5,18 +5,18 @@ import { useAuth } from "../../utils/AuthContext";
 import "./loginform.css";
 
 const Loginform = () => {
-  const [email, setEmail] = useState('');
+  const [email, setLocalEmail] = useState('');
   const [password, setPassword] = useState('');
   const apiUrl = import.meta.env.VITE_APP_API_URL || 'http://localhost:5173';
   const navigate = useNavigate(); 
-  const { setIsLoggedIn } = useAuth(); // Access the AuthContext to update login state
+  const { setIsLoggedIn, setEmail } = useAuth(); // Access the AuthContext to update login state and email
 
   const checkEmail = async (email) => {
     try {
       const response = await fetch(`${apiUrl}/check-email`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json' 
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           customer_ids: {
@@ -58,6 +58,7 @@ const Loginform = () => {
 
   const handleLogin = (event) => {
     event.preventDefault();
+    console.log('Logging in with email:', email); // Debug log
     checkEmail(email);
   };
 
@@ -81,7 +82,7 @@ const Loginform = () => {
                 type="email"
                 name="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setLocalEmail(e.target.value)}
                 required
               />
             </label>
