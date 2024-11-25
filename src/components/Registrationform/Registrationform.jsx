@@ -55,6 +55,7 @@ const Registrationform = () => {
             'last_name': last_name
           });
         setIsLoggedIn(true); // Update global login state
+        setAuthEmail(email); // Set email in AuthContext
         setTimeout(() => {
           navigate("/"); // Redirect after a delay
         }, 1500);         
