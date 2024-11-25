@@ -4,13 +4,13 @@ import toast from "react-hot-toast";
 import { useAuth } from "../../utils/AuthContext"; 
 
 const Registrationform = () => {
-  const [email, set_email] = useState("");
-  const [first_name, set_first_name] = useState("");
-  const [last_name, set_last_name] = useState("");
-  const [password, set_password] = useState("");
+  const [email, setLocalEmail] = useState("");
+  const [first_name, setFirstName] = useState("");
+  const [last_name, setLastName] = useState("");
+  const [password, setPassword] = useState("");
   const apiUrl = 'https://brshop-y4bl.vercel.app/api'; 
   const navigate = useNavigate(); 
-  const { setIsLoggedIn } = useAuth(); // Access the AuthContext to update login state
+  const { setIsLoggedIn, setEmail } = useAuth(); // Access the AuthContext to update login state and email
 
   const checkEmail = async (email) => {
     try {
@@ -69,8 +69,9 @@ const Registrationform = () => {
     }
   };
 
-  const handleRegister= (event) => {
+  const handleRegister = (event) => {
     event.preventDefault();
+    console.log('Registering with email:', email); // Debug log
     checkEmail(email);
   };
 
@@ -94,7 +95,7 @@ const Registrationform = () => {
                 type="text"
                 name="email"
                 value={email}
-                onChange={(e) => set_email(e.target.value)}
+                onChange={(e) => setLocalEmail(e.target.value)}
               />
             </label>
             <label className="label">
@@ -103,7 +104,7 @@ const Registrationform = () => {
                 type="text"
                 name="first_name"
                 value={first_name}
-                onChange={(e) => set_first_name(e.target.value)}
+                onChange={(e) => setFirstName(e.target.value)}
               />
             </label>
             <label className="label">
@@ -112,7 +113,7 @@ const Registrationform = () => {
                 type="text"
                 name="last_name"
                 value={last_name}
-                onChange={(e) => set_last_name(e.target.value)}
+                onChange={(e) => setLastName(e.target.value)}
               />
             </label>                        
             <label className="label">
@@ -121,7 +122,7 @@ const Registrationform = () => {
                 type="password"
                 name="password"
                 value={password}
-                onChange={(e) => set_password(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </label>
             <p className="forgot-pass">
