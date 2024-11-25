@@ -1,7 +1,7 @@
 import https from 'https'; 
 const BLOOMREACH_PROJECT_ID = process.env.BLOOMREACH_PROJECT_ID;
 const BLOOMREACH_API_KEY = process.env.BLOOMREACH_API_KEY;
-const BLOOMREACH_CONSENT_API_URL = `https://api-demoapp.exponea.com/track/v2/projects/${BLOOMREACH_PROJECT_ID}/customers/events`;
+const BLOOMREACH_CONSENT_API_URL = `https://api-demoapp.exponea.com/track/v2/projects/${BLOOMREACH_PROJECT_ID}/batch`;
 
 export default function handler(req, res) { 
     if (req.method === 'POST') { 
