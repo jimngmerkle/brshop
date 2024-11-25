@@ -128,16 +128,17 @@ const Subscriptionform = () => {
       <div className="email-block">
         <div className="email-block-title">
           Email Subscriptions for <strong>{email}</strong>
+          <p></p>
         </div>
         <div className="email-block-subtitle">
           Here you can change your email sending preferences.
+          <p></p>
         </div>
       </div>
       <form onSubmit={handleSubmit} id="form">
         <div className="checkboxes">
           {categories.map((category) => (
             <div key={category.id}>
-              <hr />
               <label>
                 <input
                   type="checkbox"
@@ -149,8 +150,7 @@ const Subscriptionform = () => {
             </div>
           ))}
         </div>
-        <hr />
-        <button type="submit">Change subscriptions</button>
+        <button class="btn-primary" type="submit">Change subscriptions</button>
       </form>
     </div>
   );
