@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useAuth } from "../../utils/AuthContext"; 
 import './Subscriptionform.css';
 
 const Subscriptionform = () => {
@@ -57,16 +58,12 @@ const Subscriptionform = () => {
       {isSubmitted && <div className="success">Settings saved!</div>}
       <div className="email-block">
         <div className="email-block-title">
-          Email Subscriptions for <strong>{email}</strong>
+          Email Subscriptions for <strong>${email}</strong>
         </div>
         <div className="email-block-subtitle">
           Here you can change your email sending preferences.
         </div>
       </div>
-      <h2>We are sorry to see you go.</h2>
-      <p>
-        It seems that you don't like getting e-mails from us. You can unsubscribe now or give us a second chance. Please select the categories you wish to receive newsletters from.
-      </p>
       <form onSubmit={handleSubmit} id="form">
         <div className="checkboxes">
           {categories.map((category) => (
