@@ -48,9 +48,8 @@ const Subscriptionform = () => {
           const parsedData = JSON.parse(data.data); // Parse the JSON string
           const updatedCategories = parsedData.results.map((result, index) => ({
             id: index,
-            name: result.category || `Category ${index + 1}`, // Provide a default name if category is missing
-            valid: result.value,
-            description: result.value ? "subscribed" : "not subscribed"
+            name: ["email", "sms", "newsletter"][index], // Set category names explicitly
+            valid: result.value
           }));
           setCategories(updatedCategories);
         } else {
@@ -129,9 +128,6 @@ const Subscriptionform = () => {
                   onChange={() => handleCheckboxChange(category.id)}
                 />
                 <span className="checkbox-title">{category.name}</span>
-                {category.description && (
-                  <span className="checkbox-subtitle">{category.description}</span>
-                )}
               </label>
             </div>
           ))}
