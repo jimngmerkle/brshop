@@ -45,9 +45,10 @@ const Subscriptionform = () => {
         console.log('data:', data);
 
         if (data.success) {
-          const updatedCategories = data.results.map((result, index) => ({
+          const parsedData = JSON.parse(data.data); // Parse the JSON string
+          const updatedCategories = parsedData.results.map((result, index) => ({
             id: index,
-            name: result.category,
+            name: result.category || `Category ${index + 1}`, // Provide a default name if category is missing
             valid: result.value,
             description: result.value ? "subscribed" : "not subscribed"
           }));
