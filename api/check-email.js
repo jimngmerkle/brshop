@@ -9,7 +9,7 @@ export default function handler(req, res) {
             method: 'POST', 
             headers: { 'Authorization': `Basic ${BLOOMREACH_API_KEY}`, 
             'Content-Type': 'application/json', 
-            'Content-Length': Buffer.byteLength(JSON.stringify(payload)) 
+            'Content-Length': Buffer.byteLength(JSON.stringify(payload))  
         } 
     }; 
     
