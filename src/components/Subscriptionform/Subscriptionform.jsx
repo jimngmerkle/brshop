@@ -23,8 +23,19 @@ const Subscriptionform = () => {
             },
             attributes: [
               {
-                type: 'id',
-                id: 'registered'
+                type: "consent",
+                category: "email",
+                mode: "valid"
+              },
+              {
+                type: "consent",
+                category: "sms",
+                mode: "valid"
+              },
+              {
+                type: "consent",
+                category: "newsletter",
+                mode: "valid"
               }
             ]
           })
@@ -34,7 +45,13 @@ const Subscriptionform = () => {
         console.log('data:', data);
 
         if (data.success) {
-          setCategories(data.categories);
+          const updatedCategories = data.results.map((result, index) => ({
+            id: index,
+            name: result.category,
+            valid: result.value,
+            description: result.value ? "subscribed" : "not subscribed"
+          }));
+          setCategories(updatedCategories);
         } else {
           toast.error('Error fetching consents');
           console.log('Error fetching consents');
