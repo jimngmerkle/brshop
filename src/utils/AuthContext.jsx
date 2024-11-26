@@ -1,5 +1,4 @@
 import React, { createContext, useState, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
@@ -7,10 +6,8 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [email, setEmail] = useState(''); 
-  const navigate = useNavigate();
 
   const logout = () => {
-    navigate("/");
     console.log('User logged out.');
     setIsLoggedIn(false);
     setEmail(''); 
