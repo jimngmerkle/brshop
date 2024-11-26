@@ -42,7 +42,6 @@ const Subscriptionform = () => {
         });
 
         const data = await response.json();
-        console.log('data:', data);
 
         if (data.success) {
           const parsedData = JSON.parse(data.data); // Parse the JSON string
