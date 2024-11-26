@@ -1,20 +1,21 @@
 import React, { createContext, useState, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
+// Create AuthContext
 const AuthContext = createContext();
-const navigate = useNavigate(); 
 
 // Create a provider to wrap the app and provide global state
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [email, setEmail] = useState(''); // Add email state
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const logout = () => {
-    navigate("/"); 
     console.log('User logged out.');
     setIsLoggedIn(false);
     setEmail(''); // Clear email on logout
     exponea.anonymize();
+    navigate('/'); // Redirect to home page
   };
 
   return (
