@@ -1,7 +1,8 @@
 import React, { createContext, useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-// Create AuthContext
 const AuthContext = createContext();
+const navigate = useNavigate(); 
 
 // Create a provider to wrap the app and provide global state
 export const AuthProvider = ({ children }) => {
