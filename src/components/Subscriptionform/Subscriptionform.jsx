@@ -127,13 +127,15 @@ const Subscriptionform = () => {
       {isSubmitted && <div className="success">Settings saved!</div>}
       <div className="email-block">
         <div className="email-block-title">
+        <br></br>
           Email Subscriptions for <strong>{email}</strong>
-          <p></p>
-        </div>
+          <br></br>
+          </div>
         <div className="email-block-subtitle">
+        <br></br>
           Here you can change your email sending preferences.
-          <p></p>
-        </div>
+        <br></br>
+          </div>
       </div>
       <form onSubmit={handleSubmit} id="form">
         <div className="checkboxes">
@@ -150,8 +152,9 @@ const Subscriptionform = () => {
             </div>
           ))}
         </div>
+        <br></br>
         <button class="btn-primary" type="submit">Change subscriptions</button>
-        <p></p>
+        <br></br>
       </form>
     </div>
   );
