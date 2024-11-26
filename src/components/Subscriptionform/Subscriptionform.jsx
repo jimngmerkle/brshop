@@ -97,7 +97,7 @@ const Subscriptionform = () => {
       if (data.success) {
         setIsSubmitted(true);
         toast.success('Settings saved!');
-        console.log('Consent data: ', data);
+        console.log('Consent data: ', payload);
       } else {
         toast.error('Error updating consents');
         console.log('Error updating consents');
