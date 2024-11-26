@@ -58,7 +58,7 @@ const Registrationform = () => {
         setEmail(email); // Set email in AuthContext
         setTimeout(() => {
           navigate("/"); // Redirect after a delay
-        }, 1500);         
+        }, 1000);         
       } else {
         toast.error('An error occurred during registration');
         console.log('An error occurred during registration');
