@@ -9,6 +9,7 @@ export const AuthProvider = ({ children }) => {
   const [email, setEmail] = useState(''); // Add email state
 
   const logout = () => {
+    navigate("/"); 
     console.log('User logged out.');
     setIsLoggedIn(false);
     setEmail(''); // Clear email on logout
