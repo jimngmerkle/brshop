@@ -12,6 +12,7 @@ export const AuthProvider = ({ children }) => {
     setIsLoggedIn(false);
     setEmail(''); 
     exponea.anonymize();
+    window.location.href = "/";
   };
 
   return (
