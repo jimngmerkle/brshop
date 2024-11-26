@@ -157,6 +157,7 @@ const Subscriptionform = () => {
         <button class="btn-primary" type="submit">Change subscriptions</button>
         <br></br>
       </form>
+      <br></br>
     </div>
   );
 };
