@@ -139,6 +139,7 @@ const Subscriptionform = () => {
       </div>
       <form onSubmit={handleSubmit} id="form">
         <div className="checkboxes">
+        <br></br>
           {categories.map((category) => (
             <div key={category.id}>
               <label>
