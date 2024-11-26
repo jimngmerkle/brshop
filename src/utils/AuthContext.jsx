@@ -7,15 +7,15 @@ const AuthContext = createContext();
 // Create a provider to wrap the app and provide global state
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [email, setEmail] = useState(''); // Add email state
-  const navigate = useNavigate(); // Initialize useNavigate
+  const [email, setEmail] = useState(''); 
+  const navigate = useNavigate(); 
 
   const logout = () => {
     console.log('User logged out.');
     setIsLoggedIn(false);
-    setEmail(''); // Clear email on logout
+    setEmail(''); 
     exponea.anonymize();
-    navigate('/'); // Redirect to home page
+    navigate('/'); 
   };
 
   return (
