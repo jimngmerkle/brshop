@@ -12,7 +12,7 @@ const Subscriptionform = () => {
   useEffect(() => {
     const fetchConsents = async () => {
       try {
-        // Get all consent categories in Bloomreach
+        // Get all the consent categories in Bloomreach
         const contentResponse = await fetch(`${apiUrl}/get-consent`, {
           method: 'GET',
           headers: {
