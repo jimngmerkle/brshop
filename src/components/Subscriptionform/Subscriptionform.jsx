@@ -24,7 +24,7 @@ const Subscriptionform = () => {
 
         if (contentData.success) {
           const categoryIds = contentData.results.map(result => result.id);
-
+          console.log('categoryIds:',categoryIds);
           // Get the current customer status for each consent category
           const checkEmailResponse = await fetch(`${apiUrl}/check-email`, {
             method: 'POST',

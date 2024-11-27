@@ -5,12 +5,10 @@ const BLOOMREACH_API_URL = `https://api-demoapp.exponea.com/data/v2/projects/${B
 
 export default function handler(req, res) { 
     if (req.method === 'GET') { 
-        const payload = req.body; 
         const options = { 
             method: 'GET', 
             headers: { 'Authorization': `Basic ${BLOOMREACH_API_KEY}`, 
-            'Content-Type': 'application/json', 
-            'Content-Length': Buffer.byteLength(JSON.stringify(payload))  
+            'Content-Type': 'application/json'
         } 
     }; 
     
@@ -32,7 +30,6 @@ https.request(BLOOMREACH_API_URL,
     apiReq.on('error', (error) => { 
         res.status(500).json({ success: false, error: 'Internal Server Error' }); 
     }); 
-    apiReq.write(JSON.stringify(payload)); 
     apiReq.end(); 
 } else { 
     res.status(405).json({ message: 'Method Not Allowed' }); 
