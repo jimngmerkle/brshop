@@ -12,7 +12,7 @@ const Subscriptionform = () => {
   useEffect(() => {
     const fetchConsents = async () => {
       try {
-        // Get all the consent categories in Bloomreach
+        // Step 1: Fetch consent categories
         const contentResponse = await fetch(`${apiUrl}/get-consent`, {
           method: 'GET',
           headers: {
@@ -23,9 +23,10 @@ const Subscriptionform = () => {
         const contentData = await contentResponse.json();
 
         if (contentData.success) {
-          const categoryIds = contentData.results.map(result => result.id);
-          console.log('categoryIds:',categoryIds);
-          // Get the current customer status for each consent category
+          const parsedData = JSON.parse(contentData.data);
+          const categoryIds = parsedData.results.map(result => result.id);
+
+          // Step 2: Fetch current status for each consent category
           const checkEmailResponse = await fetch(`${apiUrl}/check-email`, {
             method: 'POST',
             headers: {
@@ -46,8 +47,8 @@ const Subscriptionform = () => {
           const checkEmailData = await checkEmailResponse.json();
 
           if (checkEmailData.success) {
-            const parsedData = JSON.parse(checkEmailData.data);
-            const updatedCategories = parsedData.results.map((result, index) => ({
+            const parsedCheckEmailData = JSON.parse(checkEmailData.data);
+            const updatedCategories = parsedCheckEmailData.results.map((result, index) => ({
               id: index,
               name: categoryIds[index],
               valid: result.value
