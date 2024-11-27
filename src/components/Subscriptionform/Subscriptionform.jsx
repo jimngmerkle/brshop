@@ -12,48 +12,54 @@ const Subscriptionform = () => {
   useEffect(() => {
     const fetchConsents = async () => {
       try {
-        const response = await fetch(`${apiUrl}/check-email`, {
-          method: 'POST',
+        // Get all consent categories in Bloomreach
+        const contentResponse = await fetch(`${apiUrl}/get-consent`, {
+          method: 'GET',
           headers: {
             'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            customer_ids: {
-              registered: email
-            },
-            attributes: [
-              {
-                type: "consent",
-                category: "email",
-                mode: "valid"
-              },
-              {
-                type: "consent",
-                category: "sms",
-                mode: "valid"
-              },
-              {
-                type: "consent",
-                category: "newsletter",
-                mode: "valid"
-              }
-            ]
-          })
+          }
         });
 
-        const data = await response.json();
+        const contentData = await contentResponse.json();
 
-        if (data.success) {
-          const parsedData = JSON.parse(data.data); // Parse the JSON string
-          const updatedCategories = parsedData.results.map((result, index) => ({
-            id: index,
-            name: ["email", "sms", "newsletter"][index], // Set category names explicitly
-            valid: result.value
-          }));
-          setCategories(updatedCategories);
+        if (contentData.success) {
+          const categoryIds = contentData.results.map(result => result.id);
+
+          // Get current customer status for each consent category
+          const checkEmailResponse = await fetch(`${apiUrl}/check-email`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              customer_ids: {
+                registered: email
+              },
+              attributes: categoryIds.map(id => ({
+                type: "consent",
+                category: id,
+                mode: "valid"
+              }))
+            })
+          });
+
+          const checkEmailData = await checkEmailResponse.json();
+
+          if (checkEmailData.success) {
+            const parsedData = JSON.parse(checkEmailData.data);
+            const updatedCategories = parsedData.results.map((result, index) => ({
+              id: index,
+              name: categoryIds[index],
+              valid: result.value
+            }));
+            setCategories(updatedCategories);
+          } else {
+            toast.error('Error fetching current consent status');
+            console.log('Error fetching current consent status');
+          }
         } else {
-          toast.error('Error fetching consents');
-          console.log('Error fetching consents');
+          toast.error('Error fetching consent categories');
+          console.log('Error fetching consent categories');
         }
       } catch (error) {
         console.error('Error fetching consents:', error);
