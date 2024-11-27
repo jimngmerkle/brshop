@@ -155,7 +155,7 @@ const Subscriptionform = () => {
                   checked={category.valid}
                   onChange={() => handleCheckboxChange(category.id)}
                 />
-                <span className="checkbox-title">{category.name}</span>
+                <span className="checkbox-title"> {category.name}</span>
               </label>
             </div>
           ))}
