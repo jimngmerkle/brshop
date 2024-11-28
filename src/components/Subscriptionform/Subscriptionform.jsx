@@ -13,6 +13,7 @@ const Subscriptionform = () => {
     const fetchConsents = async () => {
       try {
         // Step 1: Fetch consent categories
+        console.log('Fetching consent categories from /get-consent');
         const contentResponse = await fetch(`${apiUrl}/get-consent`, {
           method: 'GET',
           headers: {
@@ -21,30 +22,34 @@ const Subscriptionform = () => {
         });
 
         const contentData = await contentResponse.json();
+        console.log('Response from /get-consent:', contentData);
 
         if (contentData.success) {
           const parsedData = JSON.parse(contentData.data);
           const categoryIds = parsedData.results.map(result => result.id);
 
           // Step 2: Fetch current status for each consent category
+          const checkEmailPayload = {
+            customer_ids: {
+              registered: email
+            },
+            attributes: categoryIds.map(id => ({
+              type: "consent",
+              category: id,
+              mode: "valid"
+            }))
+          };
+          console.log('Fetching current consent status from /check-email with payload:', checkEmailPayload);
           const checkEmailResponse = await fetch(`${apiUrl}/check-email`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-              customer_ids: {
-                registered: email
-              },
-              attributes: categoryIds.map(id => ({
-                type: "consent",
-                category: id,
-                mode: "valid"
-              }))
-            })
+            body: JSON.stringify(checkEmailPayload)
           });
 
           const checkEmailData = await checkEmailResponse.json();
+          console.log('Response from /check-email:', checkEmailData);
 
           if (checkEmailData.success) {
             const parsedCheckEmailData = JSON.parse(checkEmailData.data);
@@ -90,6 +95,7 @@ const Subscriptionform = () => {
           }
         }))
       };
+      console.log('Submitting consent updates to /update-consent with payload:', payload);
 
       const response = await fetch(`${apiUrl}/update-consent`, {
         method: 'POST',
@@ -100,6 +106,8 @@ const Subscriptionform = () => {
       });
 
       const data = await response.json();
+      console.log('Response from /update-consent:', data);
+
       if (data.success) {
         setIsSubmitted(true);
         toast.success('Settings saved!');
