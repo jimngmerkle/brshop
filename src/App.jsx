@@ -86,7 +86,7 @@ function App() {
     }));
   
     await exponea.track('purchase', { purchase });
-    console.log(`exponea.track('purchase', ${purchase});`);
+    console.log(`exponea.track('purchase', ${JSON.stringify(purchase, null, 2)});`);
     setCartItems([]);
     toast.success("Order placed, Thanks!!");
     setIsModalOpen(false);
