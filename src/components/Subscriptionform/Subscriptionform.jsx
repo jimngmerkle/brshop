@@ -6,6 +6,7 @@ import './Subscriptionform.css';
 const Subscriptionform = () => {
   const { email } = useAuth(); // Access email from AuthContext
   const [categories, setCategories] = useState([]);
+  const [initialCategories, setInitialCategories] = useState([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const apiUrl = import.meta.env.VITE_APP_API_URL || 'http://localhost:5173';
 
@@ -59,6 +60,7 @@ const Subscriptionform = () => {
               valid: result.value
             }));
             setCategories(updatedCategories);
+            setInitialCategories(updatedCategories); // Store initial categories
           } else {
             toast.error('Error fetching current consent status');
             console.log('Error fetching current consent status');
@@ -78,9 +80,14 @@ const Subscriptionform = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    // Step 3: update consent statuses for each consent category
     try {
+      const changedCategories = categories.filter((category, index) => 
+        category.valid !== initialCategories[index].valid
+      );
+
       const payload = {
-        commands: categories.map(category => ({
+        commands: changedCategories.map(category => ({
           name: "customers/events",
           data: {
             customer_ids: {
@@ -95,6 +102,7 @@ const Subscriptionform = () => {
           }
         }))
       };
+
       console.log('Submitting consent updates to /update-consent with payload:', payload);
 
       const response = await fetch(`${apiUrl}/update-consent`, {
