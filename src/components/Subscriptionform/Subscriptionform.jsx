@@ -14,22 +14,22 @@ const Subscriptionform = () => {
       try {
         // Step 1: Fetch consent categories
         console.log('Fetching consent categories from /get-consent');
-        const contentResponse = await fetch(`${apiUrl}/get-consent`, {
+        const response = await fetch(`${apiUrl}/get-consent`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
           }
         });
 
-        const contentData = await contentResponse.json();
-        console.log('Response from /get-consent:', contentData);
+        const consentsData = await response.json();
+        console.log('Response from /get-consent:', consentsData);
 
-        if (contentData.success) {
-          const parsedData = JSON.parse(contentData.data);
-          const categoryIds = parsedData.results.map(result => result.id);
+        if (consentsData.success) {
+          const parsedConsentsData = JSON.parse(consentsData.data);
+          const categoryIds = parsedConsentsData.results.map(result => result.id);
 
           // Step 2: Fetch current status for each consent category
-          const checkEmailPayload = {
+          const currentConsentsForEmail = {
             customer_ids: {
               registered: email
             },
@@ -39,16 +39,16 @@ const Subscriptionform = () => {
               mode: "valid"
             }))
           };
-          console.log('Fetching current consent status from /check-email with payload:', checkEmailPayload);
-          const checkEmailResponse = await fetch(`${apiUrl}/check-email`, {
+          console.log('Fetching current consent status from /check-email with payload:', currentConsentsForEmail);
+          const response = await fetch(`${apiUrl}/check-email`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify(checkEmailPayload)
+            body: JSON.stringify(currentConsentsForEmail)
           });
 
-          const checkEmailData = await checkEmailResponse.json();
+          const checkEmailData = await response.json();
           console.log('Response from /check-email:', checkEmailData);
 
           if (checkEmailData.success) {
