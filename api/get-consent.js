@@ -11,6 +11,9 @@ export default function handler(req, res) {
             'Content-Type': 'application/json'
         } 
     }; 
+
+console.log('Making request to:', BLOOMREACH_API_URL);
+console.log('Request options:', options);    
     
 const apiReq = 
 https.request(BLOOMREACH_API_URL, 
@@ -21,6 +24,7 @@ https.request(BLOOMREACH_API_URL,
         }); 
         apiRes.on('end', () => { 
             if (apiRes.statusCode === 200) { 
+                console.log('Response data:', apiData);
                 res.status(200).json({ success: true, data: apiData }); 
             } else { 
                 res.status(apiRes.statusCode).json({ success: false, error: apiData }); 
