@@ -13,26 +13,29 @@ const Loginform = () => {
 
   const checkEmail = async (email) => {
     try {
+      const payload = {
+        customer_ids: {
+          registered: email
+        },
+        attributes: [
+          {
+            type: 'id',
+            id: 'registered'
+          }
+        ]
+      };
+      console.log('Sending request to /check-email with payload:', payload);
+
       const response = await fetch(`${apiUrl}/check-email`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          customer_ids: {
-            registered: email
-          },
-          attributes: [
-            {
-              type: 'id',
-              id: 'registered'
-            }
-          ]
-        })
+        body: JSON.stringify(payload)
       });
 
       const data = await response.json();
-      console.log('data:', data);
+      console.log('Response from /check-email:', data);
 
       if (data.success) {
         toast.success(`Email ${email} successfully logged in`);
