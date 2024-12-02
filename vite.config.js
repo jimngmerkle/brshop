@@ -11,4 +11,13 @@ export default defineConfig({
     sourcemap: true,
     minify: false,
   },
-}); 
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://brshop-y4bl.vercel.app',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
+});
