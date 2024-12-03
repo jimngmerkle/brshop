@@ -24,10 +24,9 @@ const Methodsform = () => {
       <div className="two-column-layout">
         <div className="left-column">
           Current user: <strong>{email}</strong>
-          <br></br>
-          <br></br>
+          <br />
           <p>Example methods:</p>
-          <br> </br>
+          <br />
           <pre>
 {`exponea.track('purchase', {
 purchase_status: 'success',
@@ -51,7 +50,7 @@ company: 'Blackmesa'
         <div className="right-column">
           <form onSubmit={handleSubmit} id="form">
             <label htmlFor="payload">Enter SDK method:</label>
-            <br></br>
+            <br />
             <textarea
               id="payload"
               name="payload"
@@ -65,7 +64,7 @@ company: 'Blackmesa'
           </form>
         </div>
       </div>
-      <br></br>
+      <br />
     </div>
   );
 };
