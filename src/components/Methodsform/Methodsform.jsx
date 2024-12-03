@@ -25,7 +25,7 @@ const Methodsform = () => {
         <div className="left-column">
           Current user: <strong>{email}</strong>
           <br />
-          <p>Example methods:</p>
+          <p>Example methods: </p>
           <br />
           <pre>
 {`exponea.track('purchase', {
