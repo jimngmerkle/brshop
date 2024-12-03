@@ -44,8 +44,11 @@ first_name: 'Gordon',
 last_name: 'Freeman',
 company: 'Blackmesa'
 });`
+
 }
         </pre>
+        <br />
+        <a href ='https://documentation.bloomreach.com/engagement/docs/tracking' target="_new">https://documentation.bloomreach.com/engagement/docs/tracking</a>
         </div>
         <div className="right-column">
           <form onSubmit={handleSubmit} id="form">
