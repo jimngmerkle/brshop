@@ -5,17 +5,17 @@ import './Methodsform.css';
 
 const Methodsform = () => {
   const { email } = useAuth(); 
-  const [payload, setPayload] = useState('');
+  const [method, setMethod] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
     try {
-      eval(payload.trim());
-      console.log(payload.trim());
-      toast.success('Event submitted!');
+      eval(method.trim());
+      console.log(method.trim());
+      toast.success('Method submitted!');
     } catch (error) {
-      console.error('Error executing payload:', error);
-      toast.error('Error executing payload');
+      console.error('Error executing method:', error);
+      toast.error('Error executing method');
     }
   };
 
@@ -49,13 +49,13 @@ company: 'Blackmesa'
         </div>
         <div className="right-column">
           <form onSubmit={handleSubmit} id="form">
-            <label htmlFor="payload">Enter SDK method:</label>
+            <label htmlFor="method">Enter SDK method:</label>
             <br />
             <textarea
-              id="payload"
-              name="payload"
-              value={payload}
-              onChange={(e) => setPayload(e.target.value)}
+              id="method"
+              name="method"
+              value={method}
+              onChange={(e) => setMethod(e.target.value)}
               className="event-textarea"
               placeholder="Enter SDK method"
               required
