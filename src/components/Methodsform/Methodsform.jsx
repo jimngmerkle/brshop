@@ -27,7 +27,7 @@ const Methodsform = () => {
           <br></br>
           <br></br>
           <p>Example methods:</p>
-          <br></br>
+          <br> </br>
           <pre>
 {`exponea.track('purchase', {
 purchase_status: 'success',
