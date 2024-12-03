@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import './Subscriptionform.css';
 
 const Subscriptionform = () => {
-  const { email } = useAuth(); // Access email from AuthContext
+  const { email } = useAuth(); 
   const [categories, setCategories] = useState([]);
   const [initialCategories, setInitialCategories] = useState([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
