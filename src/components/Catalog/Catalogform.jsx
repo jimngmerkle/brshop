@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { useAuth } from "../../utils/AuthContext"; 
 import toast from "react-hot-toast";
 import './Catalogform.css';
+import { Link, useNavigate } from "react-router-dom";
 
 const Catalogform = () => {
   const { email } = useAuth(); 
   const [products, setProducts] = useState([]);
-  const [bloomreachPayload, setBloomreachPayload] = useState(null);
+  const [catalogName, setCatalogName] = useState(''); // New state for catalog name
   const [catalogId, setCatalogId] = useState(null); // New state to store catalog ID
   const apiUrl = import.meta.env.VITE_APP_API_URL || 'http://localhost:5173';
 
@@ -17,11 +18,19 @@ const Catalogform = () => {
       setProducts(data);
       console.log('fake catalog data:', data);
       toast.success('Products fetched successfully!');
-      const payload = convertToBloomreachPayload(data);
-      setBloomreachPayload(payload);
-      console.log('setBloomreachPayload:', payload);
 
-      // Call create catalog endpoint
+      // Create the payload for the create-catalog API call
+      const payload = {
+        name: catalogName,
+        is_product_catalog: true,
+        fields: [
+          { name: "field_text", type: "string", searchable: true },
+          { name: "field_date", type: "date", searchable: true },
+          { name: "field_number", type: "number", searchable: true }
+        ]
+      };
+
+      // Call create catalog endpoint with the payload
       const catalogResponse = await fetch(`${apiUrl}/create-catalog`, {
         method: 'POST',
         headers: {
@@ -36,6 +45,29 @@ const Catalogform = () => {
           toast.success('Catalog created successfully in Bloomreach!');
           setCatalogId(result.id); // Store the catalog ID
           console.log('Catalog creation result:', result);
+
+          // Call populate catalog endpoint with the products data
+          const populateResponse = await fetch(`${apiUrl}/populate-catalog`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+          });
+
+          if (populateResponse.ok) {
+            const populateResult = await populateResponse.json();
+            if (populateResult.success) {
+              toast.success('Catalog populated successfully in Bloomreach!');
+              console.log('Catalog population result:', populateResult);
+            } else {
+              toast.error('Error populating catalog in Bloomreach');
+              console.error('Error populating catalog:', populateResult);
+            }
+          } else {
+            toast.error('Error populating catalog in Bloomreach');
+            console.error('Error populating catalog:', populateResponse.statusText);
+          }
         } else {
           toast.error('Error creating catalog in Bloomreach');
           console.error('Error creating catalog:', result);
@@ -50,36 +82,16 @@ const Catalogform = () => {
     }
   };
 
-  const convertToBloomreachPayload = (products) => {
-    const formattedProducts = products.map(product => ({
-      name: product.title,
-      description: product.description,
-      price: product.price,
-      category: product.category,
-      image: product.image,
-      rating: product.rating.rate,
-      rating_count: product.rating.count
-    }));
-
-    return {
-      name: "catalog_name",
-      is_product_catalog: true,
-      fields: [
-        { name: "name", type: "string", searchable: true },
-        { name: "description", type: "string", searchable: true },
-        { name: "price", type: "number", searchable: true },
-        { name: "category", type: "string", searchable: true },
-        { name: "image", type: "string", searchable: false },
-        { name: "rating", type: "number", searchable: true },
-        { name: "rating_count", type: "number", searchable: true }
-      ],
-      items: formattedProducts
-    };
-  };
-
   return (
     <div className="content">
       <p>Current user: <strong>{email}</strong></p>
+      <br />
+      <input 
+        type="text" 
+        placeholder="Enter catalog name" 
+        value={catalogName} 
+        onChange={(e) => setCatalogName(e.target.value)} 
+      />
       <br />
       <button className="btn-primary" onClick={fetchProducts}>Generate catalog in Bloomreach</button>
       <br />

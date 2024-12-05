@@ -3,7 +3,7 @@ import cors from 'cors';
 
 const BLOOMREACH_PROJECT_ID = process.env.BLOOMREACH_PROJECT_ID;
 const BLOOMREACH_API_KEY = process.env.BLOOMREACH_API_KEY;
-const BLOOMREACH_API_URL = `https://api-demoapp.exponea.com/data/v2/projects/${BLOOMREACH_PROJECT_ID}/catalogs`;
+const BLOOMREACH_API_URL = `https://api-demoapp.exponea.com/data/v2/projects/${BLOOMREACH_PROJECT_ID}/${mycatalogid}/items`;
 
 const corsMiddleware = cors({
   origin: 'http://localhost:5173',
