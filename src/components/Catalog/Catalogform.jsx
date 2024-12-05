@@ -48,7 +48,7 @@ const Catalogform = () => {
 
           // Call populate catalog endpoint with the products data
           const populateResponse = await fetch(`${apiUrl}/populate-catalog`, {
-            method: 'POST',
+            method: 'PUT',
             headers: {
               'Content-Type': 'application/json'
             },

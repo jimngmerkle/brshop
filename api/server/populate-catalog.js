@@ -7,7 +7,7 @@ const BLOOMREACH_API_URL = `https://api-demoapp.exponea.com/data/v2/projects/${B
 
 const corsMiddleware = cors({
   origin: 'http://localhost:5173',
-  methods: ['POST'],
+  methods: ['PUT'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 });
 
@@ -15,10 +15,10 @@ export default function handler(req, res) {
 
   corsMiddleware(req, res, () => {
  
-    if (req.method === 'POST') {
+    if (req.method === 'PUT') {
       const payload = req.body;
       const options = {
-        method: 'POST',
+        method: 'PUT',
         headers: {
           'Authorization': `Basic ${BLOOMREACH_API_KEY}`,
           'Content-Type': 'application/json',
