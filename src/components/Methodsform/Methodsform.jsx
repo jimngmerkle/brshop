@@ -6,6 +6,7 @@ import './Methodsform.css';
 const Methodsform = () => {
   const { email } = useAuth(); 
   const [method, setMethod] = useState('');
+  const [products, setProducts] = useState([]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -16,6 +17,19 @@ const Methodsform = () => {
     } catch (error) {
       console.error('Error executing method:', error);
       toast.error('Error executing method');
+    }
+  };
+
+  const fetchProducts = async () => {
+    try {
+      const response = await fetch('https://fakestoreapi.com/products');
+      const data = await response.json();
+      setProducts(data);
+      console.log(data);
+      toast.success('Products fetched successfully!');
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      toast.error('Error fetching products');
     }
   };
 
@@ -65,6 +79,16 @@ company: 'Blackmesa'
             />
             <button className="btn-primary" type="submit">Submit</button>
           </form>
+          <button className="btn-secondary" onClick={fetchProducts}>Fetch Products</button>
+          <div>
+            {products.length > 0 && (
+              <ul>
+                {products.map(product => (
+                  <li key={product.id}>{product.title} - ${product.price}</li>
+                ))}
+              </ul>
+            )}
+          </div>
         </div>
       </div>
       <br />
