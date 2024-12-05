@@ -53,7 +53,16 @@ const Navbar = () => {
               >
                 SDK Methods
               </Link>
-            </li>            
+            </li>      
+            <li>
+              <Link
+                aria-label="Catalog"
+                className="link-hover"
+                to="/catalogpage"
+              >
+                Catalog
+              </Link>
+            </li>                   
             {!isLoggedIn ? ( // Show "Login" if not logged in
               <li>
                 <Link aria-label="Login" className="link-hover" to="/login">
