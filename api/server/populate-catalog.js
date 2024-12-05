@@ -3,7 +3,6 @@ import cors from 'cors';
 
 const BLOOMREACH_PROJECT_ID = process.env.BLOOMREACH_PROJECT_ID;
 const BLOOMREACH_API_KEY = process.env.BLOOMREACH_API_KEY;
-const BLOOMREACH_API_URL = `https://api-demoapp.exponea.com/data/v2/projects/${BLOOMREACH_PROJECT_ID}/${mycatalogid}/items`;
 
 const corsMiddleware = cors({
   origin: 'http://localhost:5173',
@@ -16,7 +15,9 @@ export default function handler(req, res) {
   corsMiddleware(req, res, () => {
  
     if (req.method === 'PUT') {
+      const { catalogId } = req.query;  
       const payload = req.body;
+      const BLOOMREACH_API_URL = `https://api-demoapp.exponea.com/data/v2/projects/${BLOOMREACH_PROJECT_ID}/${catalogId}/items`;
       const options = {
         method: 'PUT',
         headers: {

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useAuth } from "../../utils/AuthContext"; 
 import toast from "react-hot-toast";
 import './Catalogform.css';
-import { Link, useNavigate } from "react-router-dom";
 
 const Catalogform = () => {
   const { email } = useAuth(); 
@@ -45,9 +44,9 @@ const Catalogform = () => {
           toast.success('Catalog created successfully in Bloomreach!');
           setCatalogId(result.id); // Store the catalog ID
           console.log('Catalog creation result:', result);
-
-          // Call populate catalog endpoint with the products data
-          const populateResponse = await fetch(`${apiUrl}/populate-catalog`, {
+          const catalogId = result.id;
+          
+          const populateResponse = await fetch(`${apiUrl}/populate-catalog/${catalogId}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json'
