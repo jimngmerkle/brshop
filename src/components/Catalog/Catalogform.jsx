@@ -71,7 +71,7 @@ const Catalogform = () => {
             }
           ];
 
-          const populateResponse = await fetch(`${apiUrl}/populate-catalog`, {
+          const populateResponse = await fetch(`${apiUrl}/populate-catalog/${catalogId}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json'
