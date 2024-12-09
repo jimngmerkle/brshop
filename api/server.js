@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 // Configure CORS to allow requests from frontend
 app.use(cors({
   origin: REACT_APP_API_URL,
-  methods: 'GET,POST',
+  methods: 'GET,POST,PUT',
   credentials: true
 }));
 

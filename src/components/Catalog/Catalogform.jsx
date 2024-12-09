@@ -51,12 +51,32 @@ const Catalogform = () => {
           console.log('Catalog creation result:', result);
           console.log("catalogId: ", catalogId);
           
-          const populateResponse = await fetch(`${apiUrl}/populate-catalog/${catalogId}`, {
+          // Use test data for the populate-catalog call
+          const testData = [
+            {
+              "item_id": "1",
+              "properties": {
+                "field_date": "01012024",
+                "field_number": "123",
+                "field_text": "mytext"
+              }
+            },
+            {
+              "item_id": "2",
+              "properties": {
+                "field_date": "02012024",
+                "field_number": "234",
+                "field_text": "mytext2"
+              }
+            }
+          ];
+
+          const populateResponse = await fetch(`${apiUrl}/populate-catalog`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(testData)
           });
 
           if (populateResponse.ok) {

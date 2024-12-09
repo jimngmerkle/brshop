@@ -3,6 +3,8 @@ import cors from 'cors';
 
 const BLOOMREACH_PROJECT_ID = process.env.BLOOMREACH_PROJECT_ID;
 const BLOOMREACH_API_KEY = process.env.BLOOMREACH_API_KEY;
+//const BLOOMREACH_API_URL = `https://api-demoapp.exponea.com/data/v2/projects/${BLOOMREACH_PROJECT_ID}/catalogs`;
+const BLOOMREACH_API_URL = `https://api-demoapp.exponea.com/data/v2/projects/6dce00a6-25ba-11eb-9cc7-7e4f7e40a7d0/catalogs/6756c3ad0fa3bc09159600ed/items`;
 
 const corsMiddleware = cors({
   origin: 'http://localhost:5173',
@@ -15,9 +17,7 @@ export default function handler(req, res) {
   corsMiddleware(req, res, () => {
  
     if (req.method === 'PUT') {
-      const { catalogId } = req.query;  
       const payload = req.body;
-      const BLOOMREACH_API_URL = `https://api-demoapp.exponea.com/data/v2/projects/${BLOOMREACH_PROJECT_ID}/${catalogId}/items`;
       const options = {
         method: 'PUT',
         headers: {
@@ -51,7 +51,7 @@ export default function handler(req, res) {
       apiReq.write(JSON.stringify(payload));
       apiReq.end();
     } else {
-    res.status(405).json({ message: 'Method Not Allowed' });
+    res.status(405).json({ message: 'Method Not Allowed.' });
     }
   });
 }
