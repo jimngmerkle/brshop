@@ -51,7 +51,7 @@ const Catalogform = () => {
           console.log('Catalog creation result:', result);
           console.log("catalogId: ", catalogId);
           
-          // Use test data for the populate-catalog call
+          // Using test data for the populate-catalog call
           const testData = [
             {
               "item_id": "1",
