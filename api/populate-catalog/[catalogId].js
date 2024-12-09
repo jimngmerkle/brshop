@@ -25,7 +25,7 @@ export default function handler(req, res) {
       const payload = req.body;
       console.log('Payload:', payload); // Log the payload
 
-     //    const BLOOMREACH_API_URL = `https://api-demoapp.exponea.com/data/v2/projects/${BLOOMREACH_PROJECT_ID}/catalogs/${catalogId}/items`;
+     //        const BLOOMREACH_API_URL = `https://api-demoapp.exponea.com/data/v2/projects/${BLOOMREACH_PROJECT_ID}/catalogs/${catalogId}/items`;
       const BLOOMREACH_API_URL = `https://api-demoapp.exponea.com/data/v2/projects/${BLOOMREACH_PROJECT_ID}/catalogs/6756c3ad0fa3bc09159600ed/items`;
       console.log('Bloomreach API URL:', BLOOMREACH_API_URL); // Log the API URL
 
