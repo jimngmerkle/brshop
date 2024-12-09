@@ -11,7 +11,7 @@
   ],
   "routes": [
     {
-      "src": "/api/populate-catalog/(.*)",
+      "src": "/api/populate-catalog/(.*)", 
       "dest": "/api/populate-catalog/[catalogId].js"
     }
   ],
