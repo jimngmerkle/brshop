@@ -1,6 +1,15 @@
 {
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/" }
+  "builds": [
+    {
+      "src": "api/**/*.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/populate-catalog/(.*)",
+      "dest": "/api/populate-catalog/[catalogId].js"
+    }
   ],
   "headers": [
     {
