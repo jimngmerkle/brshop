@@ -66,8 +66,8 @@
     margin-left: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    justify-content: flex-start;
   }
 
   .two-column-layout {
@@ -240,6 +240,16 @@
     .product-content {
       grid-template-columns: repeat(2, 1fr);
     }
+  }
+
+  .text-box {
+    width: 40%; 
+    height: 50px; 
+    box-sizing: border-box; 
+    resize: none;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;  
   }
   
   @media only screen and (max-width: 1024px) {

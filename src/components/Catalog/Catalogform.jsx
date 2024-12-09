@@ -42,9 +42,14 @@ const Catalogform = () => {
         const result = await catalogResponse.json();
         if (result.success) {
           toast.success('Catalog created successfully in Bloomreach!');
-          setCatalogId(result.id); // Store the catalog ID
+          
+          // Parse the data field to get the catalog ID
+          const parsedData = JSON.parse(result.data);
+          const catalogId = parsedData.id;
+          
+          setCatalogId(catalogId); // Store the catalog ID
           console.log('Catalog creation result:', result);
-          const catalogId = result.id;
+          console.log("catalogId: ", catalogId);
           
           const populateResponse = await fetch(`${apiUrl}/populate-catalog/${catalogId}`, {
             method: 'PUT',
@@ -85,10 +90,12 @@ const Catalogform = () => {
     <div className="content">
       <p>Current user: <strong>{email}</strong></p>
       <br />
-      <input 
+      <span>Enter a catalog name: </span>
+      <textarea 
         type="text" 
-        placeholder="Enter catalog name" 
+        placeholder="Catalog name" 
         value={catalogName} 
+        className="text-box"
         onChange={(e) => setCatalogName(e.target.value)} 
       />
       <br />
