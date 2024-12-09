@@ -1,19 +1,6 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "api/**/*.js",
-      "use": "@vercel/node"
-    }
-  ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/" }
-  ],
-  "routes": [
-    {
-      "src": "/api/populate-catalog/(.*)", 
-      "dest": "/api/populate-catalog/[catalogId].js"
-    }
   ],
   "headers": [
     {
