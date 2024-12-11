@@ -1,24 +1,33 @@
-import boto3
-import json
+const AWS = require('aws-sdk');
 
-# Initialize AWS Translate client
-translate = boto3.client('translate')
+// Initialize AWS Translate client
+const translate = new AWS.Translate();
 
-def handler(event, context):
-    # Parse input from Bloomreach
-    body = json.loads(event["body"])
-    text_to_translate = body.get("text", "Default text")
-    target_language = body.get("target_language", "es")  # Default to Spanish
+exports.handler = async (event) => {
+    try {
+        // Parse the input JSON from API Gateway
+        const body = JSON.parse(event.body);
+        const textToTranslate = body.text || "Default text";
+        const targetLanguage = body.target_language || "es"; // Default to Spanish
 
-    # Perform translation
-    translated_text = translate.translate_text(
-        Text=text_to_translate,
-        SourceLanguageCode="en",
-        TargetLanguageCode=target_language
-    )["TranslatedText"]
+        // Perform the translation
+        const result = await translate.translateText({
+            Text: textToTranslate,
+            SourceLanguageCode: "en", // Assume source language is English
+            TargetLanguageCode: targetLanguage
+        }).promise();
 
-    # Return translated text
-    return {
-        "statusCode": 200,
-        "body": json.dumps({"translated_text": translated_text})
+        // Return the translated text
+        return {
+            statusCode: 200,
+            body: JSON.stringify({ translated_text: result.TranslatedText }),
+        };
+
+    } catch (error) {
+        console.error("Error translating text:", error);
+        return {
+            statusCode: 500,
+            body: JSON.stringify({ error: error.message }),
+        };
     }
+};
