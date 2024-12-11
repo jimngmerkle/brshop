@@ -1,0 +1,24 @@
+import boto3
+import json
+
+# Initialize AWS Translate client
+translate = boto3.client('translate')
+
+def handler(event, context):
+    # Parse input from Bloomreach
+    body = json.loads(event["body"])
+    text_to_translate = body.get("text", "Default text")
+    target_language = body.get("target_language", "es")  # Default to Spanish
+
+    # Perform translation
+    translated_text = translate.translate_text(
+        Text=text_to_translate,
+        SourceLanguageCode="en",
+        TargetLanguageCode=target_language
+    )["TranslatedText"]
+
+    # Return translated text
+    return {
+        "statusCode": 200,
+        "body": json.dumps({"translated_text": translated_text})
+    }
