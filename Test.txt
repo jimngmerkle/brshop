@@ -1,33 +1,31 @@
-const AWS = require('aws-sdk');
+Status: Failed
+Test Event Name: first_test
 
-// Initialize AWS Translate client
-const translate = new AWS.Translate();
+Response:
+{
+  "errorType": "ReferenceError",
+  "errorMessage": "require is not defined in ES module scope, you can use import instead",
+  "trace": [
+    "ReferenceError: require is not defined in ES module scope, you can use import instead",
+    "    at file:///var/task/index.mjs:1:13",
+    "    at ModuleJob.run (node:internal/modules/esm/module_job:268:25)",
+    "    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:543:26)",
+    "    at async _tryAwaitImport (file:///var/runtime/index.mjs:1008:16)",
+    "    at async _tryRequire (file:///var/runtime/index.mjs:1057:86)",
+    "    at async _loadUserApp (file:///var/runtime/index.mjs:1081:16)",
+    "    at async UserFunction.js.module.exports.load (file:///var/runtime/index.mjs:1119:21)",
+    "    at async start (file:///var/runtime/index.mjs:1282:23)",
+    "    at async file:///var/runtime/index.mjs:1288:1"
+  ]
+}
 
-exports.handler = async (event) => {
-    try {
-        // Parse the input JSON from API Gateway
-        const body = JSON.parse(event.body);
-        const textToTranslate = body.text || "Default text";
-        const targetLanguage = body.target_language || "es"; // Default to Spanish
+Function Logs:
+2024-12-11T09:34:36.528Z	undefined	ERROR	Uncaught Exception 	{"errorType":"ReferenceError","errorMessage":"require is not defined in ES module scope, you can use import instead","stack":["ReferenceError: require is not defined in ES module scope, you can use import instead","    at file:///var/task/index.mjs:1:13","    at ModuleJob.run (node:internal/modules/esm/module_job:268:25)","    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:543:26)","    at async _tryAwaitImport (file:///var/runtime/index.mjs:1008:16)","    at async _tryRequire (file:///var/runtime/index.mjs:1057:86)","    at async _loadUserApp (file:///var/runtime/index.mjs:1081:16)","    at async UserFunction.js.module.exports.load (file:///var/runtime/index.mjs:1119:21)","    at async start (file:///var/runtime/index.mjs:1282:23)","    at async file:///var/runtime/index.mjs:1288:1"]}
+INIT_REPORT Init Duration: 133.63 ms	Phase: init	Status: error	Error Type: Runtime.Unknown
+2024-12-11T09:34:37.557Z	undefined	ERROR	Uncaught Exception 	{"errorType":"ReferenceError","errorMessage":"require is not defined in ES module scope, you can use import instead","stack":["ReferenceError: require is not defined in ES module scope, you can use import instead","    at file:///var/task/index.mjs:1:13","    at ModuleJob.run (node:internal/modules/esm/module_job:268:25)","    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:543:26)","    at async _tryAwaitImport (file:///var/runtime/index.mjs:1008:16)","    at async _tryRequire (file:///var/runtime/index.mjs:1057:86)","    at async _loadUserApp (file:///var/runtime/index.mjs:1081:16)","    at async UserFunction.js.module.exports.load (file:///var/runtime/index.mjs:1119:21)","    at async start (file:///var/runtime/index.mjs:1282:23)","    at async file:///var/runtime/index.mjs:1288:1"]}
+INIT_REPORT Init Duration: 1242.80 ms	Phase: invoke	Status: error	Error Type: Runtime.Unknown
+START RequestId: 5268fe97-448e-4c0a-8296-b7fd626104e8 Version: $LATEST
+END RequestId: 5268fe97-448e-4c0a-8296-b7fd626104e8
+REPORT RequestId: 5268fe97-448e-4c0a-8296-b7fd626104e8	Duration: 1252.41 ms	Billed Duration: 1253 ms	Memory Size: 128 MB	Max Memory Used: 71 MB	Status: error	Error Type: Runtime.Unknown
 
-        // Perform the translation
-        const result = await translate.translateText({
-            Text: textToTranslate,
-            SourceLanguageCode: "en", // Assume source language is English
-            TargetLanguageCode: targetLanguage
-        }).promise();
-
-        // Return the translated text
-        return {
-            statusCode: 200,
-            body: JSON.stringify({ translated_text: result.TranslatedText }),
-        };
-
-    } catch (error) {
-        console.error("Error translating text:", error);
-        return {
-            statusCode: 500,
-            body: JSON.stringify({ error: error.message }),
-        };
-    }
-};
+Request ID: 5268fe97-448e-4c0a-8296-b7fd626104e8
