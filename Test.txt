@@ -1,33 +1,10 @@
-import AWS from 'aws-sdk';
+Function Logs:
+2024-12-11T09:38:43.398Z	undefined	ERROR	Uncaught Exception 	{"errorType":"Error","errorMessage":"Cannot find package 'aws-sdk' imported from /var/task/index.mjs","code":"ERR_MODULE_NOT_FOUND","stack":["Error [ERR_MODULE_NOT_FOUND]: Cannot find package 'aws-sdk' imported from /var/task/index.mjs","    at packageResolve (node:internal/modules/esm/resolve:844:9)","    at moduleResolve (node:internal/modules/esm/resolve:913:18)","    at moduleResolveWithNodePath (node:internal/modules/esm/resolve:1043:14)","    at defaultResolve (node:internal/modules/esm/resolve:1086:79)","    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:650:12)","    at #cachedDefaultResolve (node:internal/modules/esm/loader:599:25)","    at ModuleLoader.resolve (node:internal/modules/esm/loader:582:38)","    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:241:38)","    at ModuleJob._link (node:internal/modules/esm/module_job:132:49)"]}
+INIT_REPORT Init Duration: 154.59 ms	Phase: init	Status: error	Error Type: Runtime.Unknown
+2024-12-11T09:38:44.280Z	undefined	ERROR	Uncaught Exception 	{"errorType":"Error","errorMessage":"Cannot find package 'aws-sdk' imported from /var/task/index.mjs","code":"ERR_MODULE_NOT_FOUND","stack":["Error [ERR_MODULE_NOT_FOUND]: Cannot find package 'aws-sdk' imported from /var/task/index.mjs","    at packageResolve (node:internal/modules/esm/resolve:844:9)","    at moduleResolve (node:internal/modules/esm/resolve:913:18)","    at moduleResolveWithNodePath (node:internal/modules/esm/resolve:1043:14)","    at defaultResolve (node:internal/modules/esm/resolve:1086:79)","    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:650:12)","    at #cachedDefaultResolve (node:internal/modules/esm/loader:599:25)","    at ModuleLoader.resolve (node:internal/modules/esm/loader:582:38)","    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:241:38)","    at ModuleJob._link (node:internal/modules/esm/module_job:132:49)"]}
+INIT_REPORT Init Duration: 1092.00 ms	Phase: invoke	Status: error	Error Type: Runtime.Unknown
+START RequestId: 152d1ef7-ddd2-4387-8ba6-be68748820ac Version: $LATEST
+END RequestId: 152d1ef7-ddd2-4387-8ba6-be68748820ac
+REPORT RequestId: 152d1ef7-ddd2-4387-8ba6-be68748820ac	Duration: 1102.01 ms	Billed Duration: 1103 ms	Memory Size: 128 MB	Max Memory Used: 71 MB	Status: error	Error Type: Runtime.Unknown
 
-// Initialize AWS Translate client
-const translate = new AWS.Translate();
-
-export const handler = async (event) => {
-    try {
-        // Parse the input JSON from API Gateway
-        const body = JSON.parse(event.body);
-        const textToTranslate = body.text || "Default text";
-        const targetLanguage = body.target_language || "es"; // Default to Spanish
-
-        // Perform the translation
-        const result = await translate.translateText({
-            Text: textToTranslate,
-            SourceLanguageCode: "en", // Assume source language is English
-            TargetLanguageCode: targetLanguage
-        }).promise();
-
-        // Return the translated text
-        return {
-            statusCode: 200,
-            body: JSON.stringify({ translated_text: result.TranslatedText }),
-        };
-
-    } catch (error) {
-        console.error("Error translating text:", error);
-        return {
-            statusCode: 500,
-            body: JSON.stringify({ error: error.message }),
-        };
-    }
-};
+Request ID: 152d1ef7-ddd2-4387-8ba6-be68748820ac
