@@ -1,31 +1,33 @@
-tatus: Failed
-Test Event Name: first_test
+import AWS from 'aws-sdk';
 
-Response:
-{
-  "errorType": "Error",
-  "errorMessage": "Cannot find package 'aws-sdk' imported from /var/task/index.mjs",
-  "trace": [
-    "Error [ERR_MODULE_NOT_FOUND]: Cannot find package 'aws-sdk' imported from /var/task/index.mjs",
-    "    at packageResolve (node:internal/modules/esm/resolve:844:9)",
-    "    at moduleResolve (node:internal/modules/esm/resolve:913:18)",
-    "    at moduleResolveWithNodePath (node:internal/modules/esm/resolve:1043:14)",
-    "    at defaultResolve (node:internal/modules/esm/resolve:1086:79)",
-    "    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:650:12)",
-    "    at #cachedDefaultResolve (node:internal/modules/esm/loader:599:25)",
-    "    at ModuleLoader.resolve (node:internal/modules/esm/loader:582:38)",
-    "    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:241:38)",
-    "    at ModuleJob._link (node:internal/modules/esm/module_job:132:49)"
-  ]
-}
+// Initialize AWS Translate client
+const translate = new AWS.Translate();
 
-Function Logs:
-2024-12-11T09:41:04.676Z	undefined	ERROR	Uncaught Exception 	{"errorType":"Error","errorMessage":"Cannot find package 'aws-sdk' imported from /var/task/index.mjs","code":"ERR_MODULE_NOT_FOUND","stack":["Error [ERR_MODULE_NOT_FOUND]: Cannot find package 'aws-sdk' imported from /var/task/index.mjs","    at packageResolve (node:internal/modules/esm/resolve:844:9)","    at moduleResolve (node:internal/modules/esm/resolve:913:18)","    at moduleResolveWithNodePath (node:internal/modules/esm/resolve:1043:14)","    at defaultResolve (node:internal/modules/esm/resolve:1086:79)","    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:650:12)","    at #cachedDefaultResolve (node:internal/modules/esm/loader:599:25)","    at ModuleLoader.resolve (node:internal/modules/esm/loader:582:38)","    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:241:38)","    at ModuleJob._link (node:internal/modules/esm/module_job:132:49)"]}
-INIT_REPORT Init Duration: 154.01 ms	Phase: init	Status: error	Error Type: Runtime.Unknown
-2024-12-11T09:41:05.772Z	undefined	ERROR	Uncaught Exception 	{"errorType":"Error","errorMessage":"Cannot find package 'aws-sdk' imported from /var/task/index.mjs","code":"ERR_MODULE_NOT_FOUND","stack":["Error [ERR_MODULE_NOT_FOUND]: Cannot find package 'aws-sdk' imported from /var/task/index.mjs","    at packageResolve (node:internal/modules/esm/resolve:844:9)","    at moduleResolve (node:internal/modules/esm/resolve:913:18)","    at moduleResolveWithNodePath (node:internal/modules/esm/resolve:1043:14)","    at defaultResolve (node:internal/modules/esm/resolve:1086:79)","    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:650:12)","    at #cachedDefaultResolve (node:internal/modules/esm/loader:599:25)","    at ModuleLoader.resolve (node:internal/modules/esm/loader:582:38)","    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:241:38)","    at ModuleJob._link (node:internal/modules/esm/module_job:132:49)"]}
-INIT_REPORT Init Duration: 1378.99 ms	Phase: invoke	Status: error	Error Type: Runtime.Unknown
-START RequestId: e3543f41-bcdf-445a-937f-d14aab6f4f9b Version: $LATEST
-END RequestId: e3543f41-bcdf-445a-937f-d14aab6f4f9b
-REPORT RequestId: e3543f41-bcdf-445a-937f-d14aab6f4f9b	Duration: 1406.81 ms	Billed Duration: 1407 ms	Memory Size: 128 MB	Max Memory Used: 71 MB	Status: error	Error Type: Runtime.Unknown
+export const handler = async (event) => {
+    try {
+        // Parse the input JSON from the test event
+        const body = JSON.parse(event.body);
+        const textToTranslate = body.text || "Default text";
+        const targetLanguage = body.target_language || "es"; // Default to Spanish
 
-Request ID: e3543f41-bcdf-445a-937f-d14aab6f4f9b
+        // Perform the translation
+        const result = await translate.translateText({
+            Text: textToTranslate,
+            SourceLanguageCode: "en", // Assume source language is English
+            TargetLanguageCode: targetLanguage
+        }).promise();
+
+        // Return the translated text
+        return {
+            statusCode: 200,
+            body: JSON.stringify({ translated_text: result.TranslatedText }),
+        };
+
+    } catch (error) {
+        console.error("Error translating text:", error);
+        return {
+            statusCode: 500,
+            body: JSON.stringify({ error: error.message }),
+        };
+    }
+};
